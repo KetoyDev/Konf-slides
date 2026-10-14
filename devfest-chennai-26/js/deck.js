@@ -216,7 +216,7 @@
     '.rec', '.flow', '.strip .seg', '.sig-note', '.numbers .n', '.steps .st-i', '.steps .rail', '.tamper',
     '.ring .core', '.sticker', '.facts .fact', '.capline', '.file', '.device .plat', '.phone', '.device .under', '.policy > *',
     '.gcap', '.ladder .r', '.plane', '.nots .row', '.s-three .it', '.callback',
-    '.s-thanks .qr', '.links', '.err-line',
+    '.s-thanks .qr', '.links', '.err-line', '.qr-card', '.url', '.s-follow .cap',
   ].join(',');
 
   const hiddenFragment = (el) => !!el.closest('.fragment:not(.visible):not(.light):not(.trigger):not(.wire)');

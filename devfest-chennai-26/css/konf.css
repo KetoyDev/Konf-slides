@@ -655,3 +655,16 @@ html.pen .reveal .sticker.fragment.stick { transform: translate(-50%, -50%) rota
 /* Art waits for the slide's content to finish drawing (deck.js adds
    .art-wait while the pen traces the components, then removes it). */
 .reveal section.art-wait .dots { opacity: 0; }
+
+/* ---------- Follow along (QR to these slides) --------------------------- */
+.s-follow { justify-content: center; }
+.s-follow .follow { display: grid; grid-template-columns: 1fr 520px; gap: 96px; align-items: center; }
+.s-follow h2 { font-size: 104px; letter-spacing: -0.045em; line-height: 1; }
+.s-follow .url { margin-top: 44px; font-family: var(--mono); font-size: 40px; color: var(--white-80); }
+.s-follow .url b { color: var(--teal); font-weight: 700; }
+.s-follow .cap { margin-top: 22px; font-size: 34px; }
+.s-follow .qr-wrap { position: relative; width: 520px; height: 520px; }
+.s-follow .qr-card { width: 520px; height: 520px; box-sizing: border-box; padding: 52px; border-radius: 40px; background: #fff; }
+.s-follow .qr-card img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.s-follow .sticker { font-size: 36px; padding: 14px 30px; }
+.fade-qr { -webkit-mask-image: radial-gradient(circle at 74% 50%, #000 26%, transparent 60%); mask-image: radial-gradient(circle at 74% 50%, #000 26%, transparent 60%); }

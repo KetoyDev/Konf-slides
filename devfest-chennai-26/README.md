@@ -1,6 +1,6 @@
 # Kotlin Over the Air — DevFest Chennai 2026
 
-22-slide talk deck built as a static site (reveal.js 5, vendored — no build step).
+23-slide talk deck built as a static site (reveal.js 5, vendored — no build step).
 The visual language follows the KotlinConf 2024–2026 stage decks (reference photos kept locally in `ref-img/`, not committed):
 flat violet / lilac / graphite surfaces, monoline geometric line-art clipped to
 the Kotlin mark, code on violet with a lifted highlight and a speech bubble,
