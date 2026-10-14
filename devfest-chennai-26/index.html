@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kotlin Over the Air — DevFest Chennai 2026</title>
+  <meta name="description" content="Kotlin Over the Air: ship a Compose screen to users in minutes, without a store release — DevFest Chennai 2026">
+  <link rel="stylesheet" href="vendor/reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="vendor/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="css/konf.css?v=20261015021016">
+</head>
+<body>
+
+<!-- Shared gradients and markers -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff3d8b"/>
+      <stop offset=".45" stop-color="#ff5a2a"/>
+      <stop offset=".75" stop-color="#e03dff"/>
+      <stop offset="1" stop-color="#8a3bff"/>
+    </linearGradient>
+    <linearGradient id="gWarm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a1a"/><stop offset="1" stop-color="#ff3d8b"/></linearGradient>
+    <linearGradient id="gSun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc61a"/><stop offset="1" stop-color="#ff7a1a"/></linearGradient>
+    <linearGradient id="gViolet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a3bff"/><stop offset="1" stop-color="#3b4bff"/></linearGradient>
+    <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3d8b"/><stop offset="1" stop-color="#c42cf0"/></linearGradient>
+    <!-- Icon set: monoline, 48px grid, drawn with currentColor -->
+    <symbol id="i-code" viewBox="0 0 48 48"><path d="M17 14l-9 10 9 10M31 14l9 10-9 10M27 9l-6 30"/></symbol><symbol id="i-gear" viewBox="0 0 48 48"><circle cx="24" cy="24" r="7"/><path d="M24 5v7M24 36v7M5 24h7M36 24h7M10.6 10.6l5 5M32.4 32.4l5 5M10.6 37.4l5-5M32.4 15.6l5-5"/></symbol><symbol id="i-file" viewBox="0 0 48 48"><path d="M12 5h16l9 9v29H12z"/><path d="M28 5v9h9"/><circle cx="24.5" cy="27" r="5"/><path d="M21.5 31.5L20 39l4.5-2 4.5 2-1.5-7.5"/></symbol><symbol id="i-chip" viewBox="0 0 48 48"><rect x="14" y="14" width="20" height="20" rx="3"/><rect x="20" y="20" width="8" height="8" rx="1"/><path d="M19 7v7M24 7v7M29 7v7M19 34v7M24 34v7M29 34v7M7 19h7M7 24h7M7 29h7M34 19h7M34 24h7M34 29h7"/></symbol><symbol id="i-phone" viewBox="0 0 48 48"><rect x="14" y="5" width="20" height="38" rx="4"/><path d="M19 13h10M19 19h10M19 25h6M22 38h4"/></symbol><symbol id="i-braces" viewBox="0 0 48 48"><path d="M18 8c-4 0-5 2-5 5v6c0 3-2 5-4 5 2 0 4 2 4 5v6c0 3 1 5 5 5M30 8c4 0 5 2 5 5v6c0 3 2 5 4 5-2 0-4 2-4 5v6c0 3-1 5-5 5"/></symbol><symbol id="i-map" viewBox="0 0 48 48"><rect x="6" y="9" width="14" height="11" rx="2"/><rect x="28" y="28" width="14" height="11" rx="2"/><path d="M20 14.5h7a4 4 0 0 1 4 4V28"/><path d="M27 24l4 4 4-4"/></symbol><symbol id="i-grid" viewBox="0 0 48 48"><rect x="8" y="8" width="13" height="13" rx="2"/><rect x="27" y="8" width="13" height="13" rx="2"/><rect x="8" y="27" width="13" height="13" rx="2"/><rect x="27" y="27" width="13" height="13" rx="2"/></symbol><symbol id="i-kotlin" viewBox="0 0 48 48"><path d="M10 10h28L24 24l14 14H10z"/></symbol><symbol id="i-lock" viewBox="0 0 48 48"><rect x="12" y="21" width="24" height="19" rx="3"/><path d="M17 21v-5a7 7 0 0 1 14 0v5"/><path d="M24 29v4"/></symbol><symbol id="i-shield" viewBox="0 0 48 48"><path d="M24 5l15 5v12c0 9.5-6.5 16-15 20-8.5-4-15-10.5-15-20V10z"/><path d="M17.5 23.5l4.5 4.5 8.5-8.5"/></symbol><symbol id="i-layers" viewBox="0 0 48 48"><path d="M24 7l17 8.5L24 24 7 15.5z"/><path d="M7 24l17 8.5L41 24M7 32.5L24 41l17-8.5"/></symbol><symbol id="i-check" viewBox="0 0 48 48"><path d="M9 13l3 3 5-6M9 25l3 3 5-6M9 37l3 3 5-6M24 13h15M24 25h15M24 37h15"/></symbol><symbol id="i-play" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M20.5 16.5L32 24l-11.5 7.5z"/></symbol><symbol id="i-gauge" viewBox="0 0 48 48"><path d="M7 33a17 17 0 0 1 34 0"/><path d="M24 33l8-10"/><circle cx="24" cy="33" r="2.5"/><path d="M12 33h3M33 33h3M24 18v3"/></symbol><symbol id="i-power" viewBox="0 0 48 48"><path d="M24 7v15"/><path d="M15 12.5a14 14 0 1 0 18 0"/></symbol><symbol id="i-rewind" viewBox="0 0 48 48"><path d="M11 24a13 13 0 1 0 4-9.4"/><path d="M10 8v8h8"/></symbol><symbol id="i-home" viewBox="0 0 48 48"><path d="M7 23L24 9l17 14"/><path d="M12 19v21h24V19"/><path d="M20 40v-9h8v9"/></symbol><symbol id="i-text" viewBox="0 0 48 48"><path d="M10 11h28M24 11v27M17 38h14"/></symbol><symbol id="i-plug" viewBox="0 0 48 48"><path d="M18 5v10M30 5v10M12 15h24v8a12 12 0 0 1-24 0z"/><path d="M24 35v8"/></symbol><symbol id="i-brush" viewBox="0 0 48 48"><path d="M31 6l11 11-15 15-11-11z"/><path d="M16 23c-5 0-8 3.5-8 8.5 0 4-2.5 7-2.5 7s10.5 1 14-2.5c3-3 2.5-8-3.5-13z"/></symbol><symbol id="i-db" viewBox="0 0 48 48"><ellipse cx="24" cy="12" rx="13" ry="5"/><path d="M11 12v24c0 2.8 5.8 5 13 5s13-2.2 13-5V12M11 24c0 2.8 5.8 5 13 5s13-2.2 13-5"/></symbol><symbol id="i-nav" viewBox="0 0 48 48"><path d="M24 6l12 34-12-7-12 7z"/></symbol><symbol id="i-globe" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c5 5 7.5 11 7.5 17S29 36 24 41c-5-5-7.5-11-7.5-17S19 12 24 7z"/></symbol><symbol id="i-threads" viewBox="0 0 48 48"><path d="M7 14h34M7 24h24M7 34h29"/><circle cx="36" cy="24" r="3"/></symbol><symbol id="i-x" viewBox="0 0 48 48"><path d="M14 14l20 20M34 14L14 34"/></symbol><symbol id="i-team" viewBox="0 0 48 48"><circle cx="18" cy="17" r="6"/><circle cx="32" cy="19" r="5"/><path d="M7 39c0-6 5-10 11-10s11 4 11 10M29 30c6 0 12 3 12 9"/></symbol>
+    <marker id="tip" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L12 6 L0 12 z" fill="rgba(255,255,255,.64)"/>
+    </marker>
+  </defs>
+</svg>
+
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 01 · TITLE ======================================================= -->
+    <section class="s s-title kotlin" data-background-color="#7f52ff" data-background-gradient="linear-gradient(120deg, #7F52FF 0%, #7F52FF 34%, #C711E1 72%, #E44857 100%)">
+      <svg class="art" data-art="line" data-cols="6" data-rows="6" data-cell="120" data-seed="11" data-mask="k" data-stroke="rgba(255,255,255,.72)"></svg>
+      <div class="event z">DevFest Chennai 2026</div>
+      <div class="z">
+        <h1>Kotlin<br>Over the Air</h1>
+        <p class="lead">Ship a Compose screen to users in minutes. No store release.</p>
+      </div>
+      <div class="who z">
+        <span>Aditya Shinde<small>KetoyVM</small></span>
+        <span>Co-speaker<small>Company</small></span>
+      </div>
+      <aside class="notes">
+        <p>⏱ 0:00 → 1:30 · <b>[A] Aditya</b></p>
+        <ul>
+          <li>Hands up: who shipped a one-line fix, then waited a week?</li>
+          <li>"That wait is what this talk is about."</li>
+          <li>One sentence each: who we are. KetoyVM, open source.</li>
+          <li>Promise: by the end you'll see a Kotlin edit reach a phone, live.</li>
+        </ul>
+        <p>→ "Let's start with that week."</p>
+      </aside>
+    </section>
+
+    <!-- 02 · THE PROBLEM ================================================= -->
+    <section class="s kotlin s-problem" data-background-color="#7f52ff">
+      <svg class="art" data-art="solid" data-cols="4" data-rows="2" data-cell="110" data-seed="31" data-mask="rect" data-fills="url(#gWarm),url(#gSun),url(#gPink)" style="right:-30px; top:-30px; width:440px; height:220px"></svg>
+      <h2>Your fix is ready today.<br>Your users get it <span class="late">next week.</span></h2>
+
+      <span class="fragment trigger" data-fragment-index="0" data-run="timeline"></span>
+      <div class="timeline" id="timeline">
+        <div class="rail"><i></i></div>
+        <div class="step" style="left:0%"><div class="node"></div><div class="t">Fix merged<small>Day 0</small></div></div>
+        <div class="step" style="left:17%"><div class="node"></div><div class="t">Build + QA<small>Day 1–2</small></div></div>
+        <div class="step" style="left:34%"><div class="node"></div><div class="t">Store review<small>hours to 2 days</small></div></div>
+        <div class="step" style="left:52%"><div class="node"></div><div class="t">Staged rollout<small>days</small></div></div>
+        <div class="step late" style="left:100%"><div class="node"></div><div class="t">Users update<small>1–2 weeks · some never</small></div></div>
+      </div>
+
+      <div class="who-ships">
+        <span class="k fragment fade" data-fragment-index="1">Server-driven UI in production</span>
+        <span class="v fragment fade" data-fragment-index="1">Airbnb · Lyft · Netflix · Spotify</span>
+        <span class="k fragment fade" data-fragment-index="1">Code over the air in production</span>
+        <span class="v fragment fade" data-fragment-index="1">React Native (Expo Updates) · Flutter (Shorebird)</span>
+      </div>
+      <p class="kq fragment rise" data-fragment-index="1">Kotlin and Compose<span>?</span></p>
+
+      <aside class="notes">
+        <p>⏱ 1:30 → 3:30 · <b>[A]</b> · CLICK ×2</p>
+        <ul>
+          <li><b>▶1 timeline.</b> Play review is hours. The long pole is <i>users not updating</i>.</li>
+          <li>Feature flags only toggle what already shipped.</li>
+          <li><b>▶2</b> Both rows and "Kotlin?" appear. SDUI teams: Airbnb, Lyft, Netflix, Spotify.</li>
+          <li>RN and Flutter devs ship <i>code</i> over the air today.</li>
+          <li>Land on "Kotlin?" Pause. Let the room answer.</li>
+        </ul>
+        <p>→ "Here's why that week matters."</p>
+        <p><i>Swiggy / Flipkart removed: no public source. Add back only with a link.</i></p>
+      </aside>
+    </section>
+
+    <!-- 03 · STATEMENT — Diwali ========================================== -->
+    <section class="s st" data-background-color="#8f2cf0">
+      <div class="field" data-field></div>
+      <div class="z">
+        <h2>Your Diwali banner has to be live on Diwali morning.</h2>
+        <p class="lead">Not when the last user finally updates.</p>
+      </div>
+      <aside class="notes">
+        <p>⏱ 3:30 → 4:00 · <b>[A]</b></p>
+        <ul>
+          <li>Let it sit. Two seconds of silence.</li>
+          <li>A festival sale, a wrong price, a broken onboarding step.</li>
+        </ul>
+        <p>→ "Two ideas get confused here. Let's separate them."</p>
+      </aside>
+    </section>
+
+    <!-- 04 · DESCRIBING vs SHIPPING ====================================== -->
+    <section class="s s-vs" data-background-color="#1d1442">
+      <svg class="art ghost fade-right" data-art="line" data-cols="16" data-rows="9" data-cell="120" data-seed="201" data-mask="rect" data-stroke="rgba(255,255,255,.09)" style="left:0; top:0; width:1920px; height:1080px"></svg>
+      <svg class="art" data-art="line" data-cols="5" data-rows="2" data-cell="110" data-seed="17" data-mask="rect" style="right:-20px; top:-20px; width:550px; height:220px"></svg>
+      <h2>Describing a screen<br>vs shipping a program</h2>
+
+      <div class="lanes">
+        <div class="lane-h"><svg class="ic lane-ic" aria-hidden="true"><use href="#i-braces"/></svg>Server-driven UI<small>sends a description</small></div>
+        <div class="node-box dashed fragment light" data-fragment-index="1"><svg class="ic box-ic" aria-hidden="true"><use href="#i-braces"/></svg><span class="t"><code>{"type":…}</code></span><small>JSON description</small></div>
+        <div class="node-box dashed fragment light" data-fragment-index="1"><svg class="ic box-ic" aria-hidden="true"><use href="#i-map"/></svg><span class="t">Interpreter</span><small>maps it to widgets</small></div>
+        <div class="node-box dashed last fragment light" data-fragment-index="1"><svg class="ic box-ic" aria-hidden="true"><use href="#i-grid"/></svg><span class="t">Fixed widgets</span><small>no logic, no new UI</small></div>
+
+        <div class="lane-h ota"><svg class="ic lane-ic" aria-hidden="true"><use href="#i-kotlin"/></svg>Kotlin over the air<small>sends a program</small></div>
+        <div class="node-box solid fragment light" data-fragment-index="1"><svg class="ic box-ic" aria-hidden="true"><use href="#i-kotlin"/></svg><span class="t"><code>Screen.kt</code></span><small>Compose code</small></div>
+        <div class="node-box solid fragment light" data-fragment-index="1"><svg class="ic box-ic" aria-hidden="true"><use href="#i-file"/></svg><span class="t"><code>.ktx</code> bundle</span><small>signed bytecode</small></div>
+        <div class="node-box solid end last fragment light" data-fragment-index="1"><svg class="ic box-ic" aria-hidden="true"><use href="#i-chip"/></svg><span class="t">Sandboxed VM</span><small>state, Flow, M3</small></div>
+      </div>
+
+      <p class="verdict fragment rise" data-fragment-index="2">SDUI changes what a screen looks like.<br><span>OTA changes what it does.</span></p>
+      <p class="capdef cap fragment rise" data-fragment-index="2">Both run only what the app chose to expose. We call those <b>capabilities</b>.</p>
+
+      <aside class="notes">
+        <p>⏱ 4:00 → 6:30 · <b>[A]</b> · CLICK ×2</p>
+        <ul>
+          <li><b>▶1</b> Both lanes light up. Walk them left to right: JSON ↔ a real <code>.kt</code> file,</li>
+          <li>an interpreter ↔ a signed bytecode file,</li>
+          <li>frozen widgets ↔ a VM with state, Flow, every component.</li>
+          <li><b>▶2</b> ★ "SDUI changes what a screen looks like. OTA changes what it does."</li>
+          <li>Define <b>capability</b>. You'll hear it all talk.</li>
+        </ul>
+        <p>→ "If you remember one sentence from today, make it this one."</p>
+        <p><i>Store-policy question? "Hold it, slide 18 answers it."</i></p>
+      </aside>
+    </section>
+
+    <!-- 05 · STATEMENT — Mantra ========================================== -->
+    <section class="s st" data-background-color="#36333d">
+      <svg class="art" data-art="line" data-cols="16" data-rows="3" data-cell="120" data-seed="4" data-mask="rect" style="left:0; bottom:0; width:1920px; height:360px"></svg>
+      <div class="z" style="margin-top:-300px">
+        <h2 class="mantra">The app is the operating system.<br><span>The server ships programs.</span></h2>
+      </div>
+      <aside class="notes">
+        <p>⏱ 6:30 → 7:00 · <b>[A] → hand over to [B]</b></p>
+        <ul><li>Say it once. Slowly. Don't explain it.</li></ul>
+        <p>→ HANDOVER: "[B] will show you how a program gets from a <code>.kt</code> file to a phone."</p>
+      </aside>
+    </section>
+
+    <!-- 06 · PIPELINE ===================================================== -->
+    <section class="s s-map kotlin" data-background-color="#7f52ff">
+      <svg class="art" data-art="line" data-cols="16" data-rows="2" data-cell="120" data-seed="42" data-mask="rect" data-stroke="rgba(255,255,255,.72)" style="left:0; bottom:0; width:1920px; height:240px"></svg>
+      <h2>From <code>.kt</code> to a phone in five steps</h2>
+      <div class="map">
+        <div class="wire fragment" data-fragment-index="1"><span class="packet"></span></div>
+        <div class="stop"><div class="o"><svg class="ic" aria-hidden="true"><use href="#i-code"/></svg></div><span class="num">01</span><b>Source</b><small>Kotlin + Compose</small></div>
+        <div class="stop"><div class="o"><svg class="ic" aria-hidden="true"><use href="#i-gear"/></svg></div><span class="num">02</span><b>Compiler</b><small>checks the sandbox</small></div>
+        <div class="stop"><div class="o"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></div><span class="num">03</span><b>.ktx</b><small>a signed file</small></div>
+        <div class="stop"><div class="o"><svg class="ic" aria-hidden="true"><use href="#i-chip"/></svg></div><span class="num">04</span><b>VM</b><small>inside your app</small></div>
+        <div class="stop hot"><div class="o"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg></div><span class="num">05</span><b>Compose</b><small>native UI</small></div>
+      </div>
+      <p class="define cap enter" style="--i:3"><b>KBC</b> = Ketoy bytecode, our own small instruction set.</p>
+      <aside class="notes">
+        <p>⏱ 7:00 → 8:00 · <b>[B]</b> · CLICK ×1</p>
+        <ul>
+          <li>One sentence per step. We go deep on 2, 3 and 4 next.</li>
+          <li><b>▶1</b> Watch one screen travel the whole way.</li>
+          <li>Define KBC (on screen). It's the only acronym.</li>
+        </ul>
+        <p>→ "Step two first: the compiler."</p>
+      </aside>
+    </section>
+
+    <!-- 07–10 · COMPILER CODE WALK (auto-animated) ======================== -->
+    <section class="s kotlin s-code" data-background-color="#7f52ff" data-auto-animate data-code-step="0">
+      <svg class="art" data-id="deco" data-art="solid" data-cols="4" data-rows="2" data-cell="105" data-seed="58" data-mask="rect" data-fills="url(#gViolet),url(#gPink),url(#gWarm)" style="right:-30px; top:-30px; width:420px; height:210px"></svg>
+      <div class="label" data-id="lbl">The compiler</div>
+      <h2 data-id="h">Plain Kotlin in. Bytecode out.</h2>
+      <div class="code-stage">
+        <div class="code" data-id="code"><span class="l on" data-id="c1"><span class="an">@KetoyComposable</span></span><span class="l on" data-id="c2"><span class="kw">fun</span> <span class="fn">TodoListScreen</span>() {</span><span class="l i1" data-id="c3"><span class="kw">val</span> todos <span class="kw">by</span> <span class="fn">observeTodos</span>().<span class="fn">collectAsState</span>(emptyList())</span><span class="l i1" data-id="c4"><span class="fn">LazyColumn</span>(Modifier.<span class="fn">padding</span>(<span class="nu">16</span>.dp)) {</span><span class="l i2" data-id="c5"><span class="fn">items</span>(todos) { todo -&gt;</span><span class="l i3" data-id="c6"><span class="fn">Text</span>(todo.title, fontWeight = FontWeight.Bold)</span><span class="l i2" data-id="c7">}</span><span class="l i1" data-id="c8">}</span><span class="l" data-id="c9">}</span></div>
+        <div class="bubble" data-id="bubble" style="top:2px">One annotation.<small>Everything this screen reaches compiles to KBC. Everything else stays normal Android code.</small></div>
+      </div>
+      <div class="step-dots" data-id="dots"><i class="on"></i><i></i><i></i><i></i></div>
+      <aside class="notes">
+        <p>⏱ 8:00 → 8:50 · <b>[B]</b></p>
+        <ul>
+          <li>Ordinary Compose. Only the annotation is new.</li>
+          <li>The compiler follows every call from this root.</li>
+          <li>It can live in your app module. No separate module.</li>
+        </ul>
+        <p>→ "Now the part server-driven UI can't do."</p>
+      </aside>
+    </section>
+
+    <section class="s kotlin s-code" data-background-color="#7f52ff" data-auto-animate data-code-step="1">
+      <svg class="art still" data-id="deco" data-art="solid" data-cols="4" data-rows="2" data-cell="105" data-seed="58" data-mask="rect" data-fills="url(#gViolet),url(#gPink),url(#gWarm)" style="right:-30px; top:-30px; width:420px; height:210px"></svg>
+      <div class="label" data-id="lbl">The compiler</div>
+      <h2 data-id="h">Plain Kotlin in. Bytecode out.</h2>
+      <div class="code-stage">
+        <div class="code" data-id="code"><span class="l" data-id="c1"><span class="an">@KetoyComposable</span></span><span class="l" data-id="c2"><span class="kw">fun</span> <span class="fn">TodoListScreen</span>() {</span><span class="l i1 on" data-id="c3"><span class="kw">val</span> todos <span class="kw">by</span> <span class="fn">observeTodos</span>().<span class="fn">collectAsState</span>(emptyList())</span><span class="l i1" data-id="c4"><span class="fn">LazyColumn</span>(Modifier.<span class="fn">padding</span>(<span class="nu">16</span>.dp)) {</span><span class="l i2" data-id="c5"><span class="fn">items</span>(todos) { todo -&gt;</span><span class="l i3" data-id="c6"><span class="fn">Text</span>(todo.title, fontWeight = FontWeight.Bold)</span><span class="l i2" data-id="c7">}</span><span class="l i1" data-id="c8">}</span><span class="l" data-id="c9">}</span></div>
+        <div class="bubble" data-id="bubble" style="top:89px">Real state and Flow.<small><code>collectAsState</code>, <code>remember</code> and <code>ViewModel</code> run in the VM, with real recomposition.</small></div>
+      </div>
+      <div class="step-dots" data-id="dots"><i></i><i class="on"></i><i></i><i></i></div>
+      <aside class="notes">
+        <p>⏱ 8:50 → 9:40 · <b>[B]</b></p>
+        <ul>
+          <li><code>observeTodos()</code> is a capability: the host app provides it.</li>
+          <li>The Flow, the state, recomposition: all real.</li>
+          <li>Q&amp;A detail: lowers to dedicated opcodes (COLLECT_AS_STATE).</li>
+        </ul>
+        <p>→ "And the UI calls themselves…"</p>
+      </aside>
+    </section>
+
+    <section class="s kotlin s-code" data-background-color="#7f52ff" data-auto-animate data-code-step="2">
+      <svg class="art still" data-id="deco" data-art="solid" data-cols="4" data-rows="2" data-cell="105" data-seed="58" data-mask="rect" data-fills="url(#gViolet),url(#gPink),url(#gWarm)" style="right:-30px; top:-30px; width:420px; height:210px"></svg>
+      <div class="label" data-id="lbl">The compiler</div>
+      <h2 data-id="h">Plain Kotlin in. Bytecode out.</h2>
+      <div class="code-stage">
+        <div class="code" data-id="code"><span class="l" data-id="c1"><span class="an">@KetoyComposable</span></span><span class="l" data-id="c2"><span class="kw">fun</span> <span class="fn">TodoListScreen</span>() {</span><span class="l i1" data-id="c3"><span class="kw">val</span> todos <span class="kw">by</span> <span class="fn">observeTodos</span>().<span class="fn">collectAsState</span>(emptyList())</span><span class="l i1 on" data-id="c4"><span class="fn">LazyColumn</span>(Modifier.<span class="fn">padding</span>(<span class="nu">16</span>.dp)) {</span><span class="l i2 on" data-id="c5"><span class="fn">items</span>(todos) { todo -&gt;</span><span class="l i3 on" data-id="c6"><span class="fn">Text</span>(todo.title, fontWeight = FontWeight.Bold)</span><span class="l i2" data-id="c7">}</span><span class="l i1" data-id="c8">}</span><span class="l" data-id="c9">}</span></div>
+        <div class="bubble" data-id="bubble" style="top:176px">Real Compose calls.<small>Parameters are matched by name, so a Material3 upgrade doesn't break old bundles.</small></div>
+      </div>
+      <div class="step-dots" data-id="dots"><i></i><i></i><i class="on"></i><i></i></div>
+      <aside class="notes">
+        <p>⏱ 9:40 → 10:30 · <b>[B]</b></p>
+        <ul>
+          <li>Each call goes to a generated <b>adapter</b>: a thin bridge to the real composable.</li>
+          <li>Story: Material3 1.4 added <code>autoSize</code> to <code>Text</code>. Old bundles kept working.</li>
+          <li>30 Material3 components, every parameter, generated by KSP.</li>
+        </ul>
+        <p>→ "Now watch what happens when I break the rules."</p>
+      </aside>
+    </section>
+
+    <section class="s kotlin s-code" data-background-color="#7f52ff" data-auto-animate data-code-step="3">
+      <svg class="art still" data-id="deco" data-art="solid" data-cols="4" data-rows="2" data-cell="105" data-seed="58" data-mask="rect" data-fills="url(#gViolet),url(#gPink),url(#gWarm)" style="right:-30px; top:-30px; width:420px; height:210px"></svg>
+      <div class="label" data-id="lbl">The compiler</div>
+      <h2 data-id="h">Plain Kotlin in. Bytecode out.</h2>
+      <div class="code-stage">
+        <div class="code" data-id="code"><span class="l" data-id="c1"><span class="an">@KetoyComposable</span></span><span class="l" data-id="c2"><span class="kw">fun</span> <span class="fn">TodoListScreen</span>() {</span><span class="l i1" data-id="c3"><span class="kw">val</span> todos <span class="kw">by</span> <span class="fn">observeTodos</span>().<span class="fn">collectAsState</span>(emptyList())</span><span class="l i1 on" data-id="c10"><span class="err"><span class="fn">Toast</span>.<span class="fn">makeText</span></span>(context, <span class="st">"hi"</span>, Toast.LENGTH_SHORT).<span class="fn">show</span>()</span><span class="l" data-id="c9">}</span></div>
+        <div class="bubble err" data-id="bubble" style="top:147px">This doesn't compile.<small>The build fails, and the message names the fix.</small></div>
+        <div class="err-line enter-shake"><b>e:</b>KetoyBC: Direct access to <u>android.widget.Toast</u>. Expose a capability instead.</div>
+      </div>
+      <div class="step-dots" data-id="dots"><i></i><i></i><i></i><i class="on"></i></div>
+      <aside class="notes">
+        <p>⏱ 10:30 → 11:30 · <b>[B]</b> · no clicks, builds itself</p>
+        <ul>
+          <li>Red squiggle: calling <code>Toast</code> directly.</li>
+          <li>The error line drops in by itself: the build fails, naming the call and the fix.</li>
+          <li>Forbidden: <code>android.*</code>, reflection, <code>java.io</code>, <code>GlobalScope</code>.</li>
+          <li>★ "Not discouraged. Unreachable. There's no instruction for it."</li>
+        </ul>
+        <p>→ "One more thing the compiler does for you."</p>
+      </aside>
+    </section>
+
+    <!-- 11 · STATEMENT — pinned compiler ================================== -->
+    <section class="s st" data-background-color="#8f2cf0">
+      <div class="field" data-field></div>
+      <svg class="art" data-art="line" data-cols="5" data-rows="5" data-cell="110" data-seed="9" data-mask="k" data-stroke="rgba(255,255,255,.7)" style="right:120px; top:290px; width:460px; height:460px"></svg>
+      <div class="z" style="max-width:1160px">
+        <div class="label">The compiler</div>
+        <h2>Your app moved to AGP&nbsp;9. The bundle didn't notice.</h2>
+        <p class="lead">The KBC compiler ships its own Kotlin (2.4.10). Your app's Kotlin and AGP versions don't matter.</p>
+      </div>
+      <aside class="notes">
+        <p>⏱ 11:30 → 12:00 · <b>[B]</b></p>
+        <ul>
+          <li>The compiler runs isolated, with its own classpath.</li>
+          <li>Verified on a consumer app using a different Kotlin and AGP 9.</li>
+          <li>This was our single biggest adoption blocker. Gone.</li>
+        </ul>
+        <p>→ "So what does adopting this cost you?"</p>
+      </aside>
+    </section>
+
+    <!-- 12 · WHAT IT COSTS YOU ============================================ -->
+    <section class="s kotlin s-cost" data-background-color="#7f52ff">
+      <svg class="art" data-art="line" data-cols="3" data-rows="3" data-cell="100" data-seed="5" data-mask="k" data-stroke="rgba(255,255,255,.42)" style="right:110px; top:60px; width:230px; height:230px"></svg>
+      <div class="label">What it costs you</div>
+      <h2>Two files. One annotation.</h2>
+      <div class="panes">
+        <div class="enter" style="--i:0">
+          <div class="fname">app/build.gradle.kts</div>
+<div class="code"><span class="l"><span class="kw">plugins</span> {</span><span class="l i1"><span class="fn">alias</span>(ketoy.plugins.compiler)</span><span class="l">}</span><span class="l"><span class="kw">dependencies</span> {</span><span class="l i1"><span class="fn">implementation</span>(ketoy.bundles.core)</span><span class="l i1"><span class="fn">implementation</span>(ketoy.annotations)</span><span class="l">}</span><span class="l"><span class="kw">ketoy</span> {</span><span class="l i1">exportFromAppModule.<span class="fn">set</span>(<span class="kw">true</span>)</span><span class="l">}</span></div>
+        </div>
+        <div class="enter" style="--i:1">
+          <div class="fname">AboutScreen.kt</div>
+<div class="code"><span class="l"><span class="an">@KetoyComposable</span></span><span class="l"><span class="kw">fun</span> <span class="fn">AboutScreen</span>() {</span><span class="l i1"><span class="fn">Text</span>(<span class="st">"Vanakkam!"</span>)</span><span class="l">}</span><span class="l">&nbsp;</span><span class="l"><span class="cm">// in your NavHost</span></span><span class="l"><span class="fn">KetoyScreen</span>(</span><span class="l i1">entryPoint = <span class="st">"AboutScreen"</span>,</span><span class="l i1">nativeFallback = { <span class="fn">AboutNative</span>() },</span><span class="l">)</span></div>
+        </div>
+      </div>
+      <p class="cmd enter" style="--i:2"><code>./gradlew :app:ketoyBundle</code> &nbsp;→&nbsp; <code>assets/ketoy/main.ktx</code></p>
+      <aside class="notes">
+        <p>⏱ 12:00 → 13:00 · <b>[B]</b> · no clicks, builds itself</p>
+        <ul>
+          <li>Gradle: one plugin, the core bundle, one line of config.</li>
+          <li>The screen is plain Compose. The host keeps a native fallback.</li>
+          <li>One task makes the signed file.</li>
+          <li>Additive: nothing in your app is rewritten.</li>
+        </ul>
+        <p>→ HANDOVER: "Enough slides. [A], show them."</p>
+        <p><i>Check the snippet against the published version's catalog aliases before stage.</i></p>
+      </aside>
+    </section>
+
+    <!-- 13 · LIVE DEMO ===================================================== -->
+    <section class="s s-demo" id="demo" data-background-color="#8f2cf0">
+      <div class="field" data-field></div>
+      <div class="z">
+        <div class="rec"><i></i> LIVE</div>
+        <h2>Demo</h2>
+        <div class="flow"><span>Edit <code>TodoListScreen.kt</code></span><span class="a">→</span><span>ketoyBundle</span><span class="a">→</span><span>upload</span><span class="a">→</span><span>the phone updates</span></div>
+      </div>
+      <svg class="illus" viewBox="0 0 560 720" aria-hidden="true">
+        <rect class="ln" pathLength="1" x="150" y="40" width="300" height="600" rx="44"/>
+        <path class="ln" pathLength="1" d="M255 70h90"/>
+        <rect class="ln" pathLength="1" x="186" y="130" width="228" height="120" rx="18"/>
+        <path class="ln" pathLength="1" d="M186 290h228M186 340h228M186 390h160"/>
+        <rect class="ln" pathLength="1" x="186" y="450" width="228" height="64" rx="32"/>
+        <circle class="ln" pathLength="1" cx="430" cy="140" r="78"/>
+        <path class="ln" pathLength="1" d="M393 140a37 37 0 1 1 11 26"/>
+        <path class="ln" pathLength="1" d="M390 118v24h24"/>
+        <path class="ln dash" pathLength="1" d="M70 690 C 120 560, 40 420, 150 330"/>
+      </svg>
+      <video class="demo-video" src="media/demo.mp4" muted playsinline preload="auto"></video>
+      <aside class="notes">
+        <p>⏱ 13:00 → 17:30 · <b>[A] drives · [B] narrates</b></p>
+        <ul>
+          <li>Phone on scrcpy / doc cam, on the KBC Todo screen.</li>
+          <li>Change one visible thing: header text and a colour.</li>
+          <li><code>./gradlew :app:ketoyBundle</code>, upload, relaunch.</li>
+          <li>★ "I didn't reinstall anything."</li>
+          <li>Bonus: the same file on the iOS simulator.</li>
+          <li>Tamper: flip one byte, and the native screen appears.</li>
+        </ul>
+        <p><i>Fallback: put a recording at media/demo.mp4. Press V on this slide to play it full screen. Rehearse on venue Wi-Fi AND a hotspot.</i></p>
+        <p>→ "What you just saw was a file. Let's open it."</p>
+      </aside>
+    </section>
+
+    <!-- 14 · THE BUNDLE ==================================================== -->
+    <section class="s s-bundle" data-background-color="#36333d">
+      <svg class="art" data-art="hatch" data-w="560" data-h="560" data-r="420" data-gap="22" data-stroke="rgba(255,255,255,.16)" data-edge="url(#gLine)" style="right:0; top:0; width:560px; height:560px"></svg>
+      <div class="label">The .ktx file</div>
+      <h2>A program you can ship</h2>
+      <div class="strip build">
+        <div class="seg magic">KTOY<small>magic</small></div>
+        <div class="seg hdr">Header<small>version</small></div>
+        <div class="seg man">Manifests<small>what it needs</small></div>
+        <div class="seg cd">Code<small>compressed</small></div>
+        <div class="seg sig"><span class="sig-t"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>Signature</span><small>Ed25519</small></div>
+      </div>
+      <p class="sig-note fragment fade" data-fragment-index="1" data-sig>Checked first, against a key inside your APK</p>
+      <div class="numbers fragment rise" data-fragment-index="1">
+        <div class="n"><div class="v"><span data-count="1.6">1.6</span><span class="u">KB</span></div><p class="cap">a real screen on Google Play</p></div>
+        <div class="n"><div class="v">≈<span data-count="0.7">0.7</span><span class="u">MB</span></div><p class="cap">the whole SDK in your APK</p></div>
+        <div class="n hero"><div class="v">0</div><p class="cap">bytes parsed before the signature verifies</p></div>
+      </div>
+      <aside class="notes">
+        <p>⏱ 17:30 → 18:30 · <b>[A]</b> · CLICK ×1</p>
+        <ul>
+          <li>Five parts build in. Manifests say which capabilities it needs.</li>
+          <li><b>▶1</b> The signature lights up; the numbers appear.</li>
+          <li>1.6 KB is FinSpare's About screen. ★ "Zero bytes parsed before the signature verifies."</li>
+        </ul>
+        <p>→ "Here's what happens when your app receives one."</p>
+        <p><i>Verify 1.6 KB against the shipped APK and measure ≈0.7 MB on the release APK this month.</i></p>
+      </aside>
+    </section>
+
+    <!-- 15 · VERIFY → ACTIVATE ============================================ -->
+    <section class="s s-verify" data-background-color="#1d1442">
+      <svg class="art fade-tr" data-art="waves" data-w="1100" data-h="420" data-n="12" data-amp="22" data-len="460" data-stroke="rgba(255,255,255,.13)" style="right:0; top:0; width:1100px; height:420px"></svg>
+      <svg class="art" data-art="line" data-cols="4" data-rows="4" data-cell="95" data-seed="71" data-mask="k" style="right:128px; bottom:64px; width:300px; height:300px"></svg>
+      <div class="label">On the phone</div>
+      <h2>Verified before it's even read</h2>
+      <div class="steps">
+        <div class="rail"></div>
+        <div class="st-i first enter" style="--i:0"><div class="dot"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></div><span class="num">01</span><b>Verify signature</b><p class="cap">key in the APK</p></div>
+        <div class="st-i enter" style="--i:1"><div class="dot"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg></div><span class="num">02</span><b>Read sections</b><p class="cap">version check</p></div>
+        <div class="st-i enter" style="--i:2"><div class="dot"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></div><span class="num">03</span><b>Check needs</b><p class="cap">every capability exists, by name</p></div>
+        <div class="st-i last enter" style="--i:3"><div class="dot"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg></div><span class="num">04</span><b>Activate</b><p class="cap">or fall back to the native screen</p></div>
+      </div>
+      <div class="tamper fragment rise shake" data-fragment-index="1"><span class="bar"></span><p><span>One byte changed?</span> It stops at step 1 and shows your native screen.</p></div>
+      <aside class="notes">
+        <p>⏱ 18:30 → 19:30 · <b>[A]</b> · CLICK ×1</p>
+        <ul>
+          <li>The four steps rise in. Pause on 3: a missing capability is rejected by name, at load.</li>
+          <li><b>▶1</b> Tamper line: callback to the demo.</li>
+        </ul>
+        <p>→ "That 'portable' format wasn't always portable."</p>
+      </aside>
+    </section>
+
+    <!-- 16 · STATEMENT — honest failure =================================== -->
+    <section class="s st kotlin coral" data-background-color="#e44857">
+      <svg class="art" data-art="line" data-cols="4" data-rows="4" data-cell="110" data-seed="88" data-mask="k" data-stroke="rgba(255,255,255,.72)" style="right:-40px; bottom:-40px; width:440px; height:440px"></svg>
+      <div class="z">
+        <div class="label">Something we got wrong</div>
+        <h2>Every bundle we shipped was Brotli.</h2>
+        <p class="lead">Brotli decoding needed a JVM library, so our "portable" format was Android-only. Now it's DEFLATE: zlib exists everywhere.</p>
+      </div>
+      <aside class="notes">
+        <p>⏱ 19:30 → 20:15 · <b>[A]</b></p>
+        <ul>
+          <li>Tell it as a story: the default hid the assumption.</li>
+          <li>The fix is what let the same file run on iOS.</li>
+          <li>★ "Assumptions hide in defaults."</li>
+        </ul>
+        <p>→ HANDOVER: "[B], what does the VM actually let a bundle do?"</p>
+      </aside>
+    </section>
+
+    <!-- 17 · RUNTIME — the sandbox ======================================== -->
+    <section class="s kotlin s-vm" data-background-color="#7f52ff">
+      <svg class="art fade-left-half" data-art="rings" data-cx="628" data-cy="560" data-from="560" data-to="1500" data-gap="52" data-stroke="rgba(255,255,255,.09)" style="left:0; top:0; width:1920px; height:1080px"></svg>
+      <h2 style="font-size:76px">A VM that can only reach what you hand it</h2>
+      <div class="wrap">
+        <div class="ring">
+          <svg viewBox="0 0 1000 640" aria-hidden="true">
+            <path id="wallPath" class="wall" d="M30 320 A470 300 0 1 1 970 320 A470 300 0 1 1 30 320"/>
+            <circle class="halo" cx="500" cy="320" r="160"/>
+            <g class="spokes draw-auto"><path class="stroke" pathLength="1" d="M500 320 L500 124"/><path class="stroke" pathLength="1" d="M500 320 L751 222"/><path class="stroke" pathLength="1" d="M500 320 L751 418"/><path class="stroke" pathLength="1" d="M500 320 L500 516"/><path class="stroke" pathLength="1" d="M500 320 L249 418"/><path class="stroke" pathLength="1" d="M500 320 L249 222"/></g>
+            <text class="wall-label"><textPath href="#wallPath" startOffset="25%" text-anchor="middle">SANDBOX</textPath></text>
+          </svg>
+          <div class="core"><b>KBC VM</b></div>
+            <span class="sticker s-yellow auto" style="left:500px; top:124px; --r:-4deg; --i:0">Compose adapters</span>
+            <span class="sticker s-pink auto" style="left:751px; top:222px; --r:5deg; --i:1">Navigation</span>
+            <span class="sticker s-grad auto" style="left:728px; top:418px; --r:-3deg; --i:2">Room · DataStore</span>
+            <span class="sticker s-teal auto" style="left:500px; top:516px; --r:3deg; --i:3">Your capabilities</span>
+            <span class="sticker s-orange auto" style="left:249px; top:418px; --r:-5deg; --i:4">Ktor network</span>
+            <span class="sticker s-white auto" style="left:249px; top:222px; --r:4deg; --i:5">Dispatchers</span>
+            <span class="sticker s-no fragment stick" data-fragment-index="1" style="left:120px; top:22px; --r:-3deg; --i:0"><i class="stamp" aria-hidden="true"><svg class="ic"><use href="#i-x"/></svg></i>Raw Android API</span>
+            <span class="sticker s-no fragment stick" data-fragment-index="1" style="left:880px; top:22px; --r:4deg; --i:1"><i class="stamp" aria-hidden="true"><svg class="ic"><use href="#i-x"/></svg></i>Reflection</span>
+            <span class="sticker s-no fragment stick" data-fragment-index="1" style="left:120px; top:618px; --r:3deg; --i:2"><i class="stamp" aria-hidden="true"><svg class="ic"><use href="#i-x"/></svg></i>GlobalScope</span>
+            <span class="sticker s-no fragment stick" data-fragment-index="1" style="left:880px; top:618px; --r:-4deg; --i:3"><i class="stamp" aria-hidden="true"><svg class="ic"><use href="#i-x"/></svg></i>DEX / JVM classes</span>
+        </div>
+        <div class="facts">
+          <div class="fact enter" style="--i:1"><b>Real coroutines</b><p class="cap">suspend, Flow, cancellation</p></div>
+          <div class="fact enter" style="--i:2"><b>One VM per process</b><p class="cap">state survives rotation</p></div>
+          <div class="fact enter" style="--i:3"><b>Nothing executable</b><p class="cap">no reflection, no JIT on iOS</p></div>
+        </div>
+      </div>
+      <p class="capline cap enter" style="--i:4">Host registers <code>observeTodos</code>. Bundle declares it needs <code>observeTodos</code>. Missing? <b>Rejected at load, by name.</b></p>
+      <aside class="notes">
+        <p>⏱ 20:15 → 22:00 · <b>[B]</b> · CLICK ×1</p>
+        <ul>
+          <li>Stickers stick on by themselves. Inside the wall: only what the host registered on purpose.</li>
+          <li><b>▶1</b> Outside: reflection, raw Android, DEX. ★ "Not discouraged. Unreachable."</li>
+          <li>Real coroutines; one VM shared by every screen; zero executable memory.</li>
+          <li>Read the bottom line: how a capability works.</li>
+        </ul>
+        <p>→ "And because the VM is plain Kotlin Multiplatform…"</p>
+        <p><i>Perf question: only quote a number you measured this month on the Pixel. Otherwise: "FinSpare's About screen is indistinguishable from native."</i></p>
+      </aside>
+    </section>
+
+    <!-- 18 · iOS — one bundle, three renderers ============================ -->
+    <section class="s kotlin s-ios" data-background-color="#7f52ff" style="padding-bottom:84px">
+      <svg class="art" data-art="solid" data-cols="4" data-rows="2" data-cell="100" data-seed="121" data-mask="rect" data-fills="url(#gPink),url(#gWarm),url(#gViolet)" style="right:-30px; top:-30px; width:400px; height:200px"></svg>
+      <h2>One signed bundle. Three renderers.</h2>
+      <p class="file"><b>main.ktx</b> · 7.6 KB · one signing key</p>
+
+      <div class="devices">
+        <div class="device enter" style="--i:0">
+          <div class="plat"><svg viewBox="0 0 48 48"><path d="M11 21a13 13 0 0 1 26 0z"/><path d="M11 25h26v12a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3z"/><path d="M16 7l3.5 5M32 7l-3.5 5"/><circle cx="19" cy="16.5" r="1.4" fill="#fff" stroke="none"/><circle cx="29" cy="16.5" r="1.4" fill="#fff" stroke="none"/></svg>Android <small>Compose</small></div>
+          <div class="phone">
+            <img class="shot" src="media/android.png" alt="" onerror="this.remove()">
+            <div class="sb"><span>12:35</span><span class="ic"><i></i><i></i></span></div>
+            <div class="top">Todos</div>
+            <div class="stickers"><span class="stk a">Vanakkam</span><span class="stk b">it's</span><span class="stk c">DevFest</span></div>
+            <div class="row">Buy filter coffee<span class="chk"></span></div>
+            <div class="row">Finish the slides<span class="chk done"></span></div>
+            <div class="row">Dark mode<span class="sw"></span></div>
+            <div class="search">Search<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M15 15l6 6"/></svg></div>
+          </div>
+          <p class="under">Live on Google Play</p>
+        </div>
+        <div class="device enter" style="--i:1">
+          <div class="plat"><svg viewBox="0 0 48 48"><path d="M33 25.5c0-4.4 3.6-6.5 3.8-6.6-2.1-3-5.3-3.4-6.4-3.4-2.7-.3-5.3 1.6-6.7 1.6s-3.5-1.6-5.8-1.5c-3 0-5.7 1.7-7.2 4.4-3.1 5.4-.8 13.3 2.2 17.7 1.5 2.1 3.2 4.5 5.5 4.4 2.2-.1 3-1.4 5.7-1.4s3.4 1.4 5.7 1.4c2.4 0 3.9-2.2 5.3-4.3 1.7-2.4 2.4-4.8 2.4-4.9-.1 0-4.5-1.7-4.5-7.4z"/><path d="M28.6 12.3c1.2-1.5 2-3.5 1.8-5.5-1.7.1-3.8 1.2-5 2.6-1.1 1.3-2.1 3.3-1.8 5.3 1.9.1 3.8-1 5-2.4z"/></svg>iOS <small>SwiftUI</small></div>
+          <div class="phone ios-native">
+            <img class="shot" src="media/ios-swiftui.png" alt="" onerror="this.remove()">
+            <div class="sb"><span>9:41</span><span class="isl"></span><span class="ic"><i></i><i></i></span></div>
+            <div class="top">Todos</div>
+            <div class="stickers"><span class="stk a">Vanakkam</span><span class="stk b">it's</span><span class="stk c">DevFest</span></div>
+            <div class="row">Buy filter coffee<span class="chk"></span></div>
+            <div class="row">Finish the slides<span class="chk done"></span></div>
+            <div class="row">Dark mode<span class="sw"></span></div>
+            <div class="search">Search<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M15 15l6 6"/></svg></div>
+          </div>
+          <p class="under">Real VStack and Text</p>
+        </div>
+        <div class="device enter" style="--i:2">
+          <div class="plat"><svg viewBox="0 0 48 48"><path d="M33 25.5c0-4.4 3.6-6.5 3.8-6.6-2.1-3-5.3-3.4-6.4-3.4-2.7-.3-5.3 1.6-6.7 1.6s-3.5-1.6-5.8-1.5c-3 0-5.7 1.7-7.2 4.4-3.1 5.4-.8 13.3 2.2 17.7 1.5 2.1 3.2 4.5 5.5 4.4 2.2-.1 3-1.4 5.7-1.4s3.4 1.4 5.7 1.4c2.4 0 3.9-2.2 5.3-4.3 1.7-2.4 2.4-4.8 2.4-4.9-.1 0-4.5-1.7-4.5-7.4z"/><path d="M28.6 12.3c1.2-1.5 2-3.5 1.8-5.5-1.7.1-3.8 1.2-5 2.6-1.1 1.3-2.1 3.3-1.8 5.3 1.9.1 3.8-1 5-2.4z"/></svg>iOS <small>Compose MP</small></div>
+          <div class="phone">
+            <img class="shot" src="media/ios-cmp.png" alt="" onerror="this.remove()">
+            <div class="sb"><span>9:41</span><span class="isl"></span><span class="ic"><i></i><i></i></span></div>
+            <div class="top">Todos</div>
+            <div class="stickers"><span class="stk a">Vanakkam</span><span class="stk b">it's</span><span class="stk c">DevFest</span></div>
+            <div class="row">Buy filter coffee<span class="chk"></span></div>
+            <div class="row">Finish the slides<span class="chk done"></span></div>
+            <div class="row">Dark mode<span class="sw"></span></div>
+            <div class="search">Search<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M15 15l6 6"/></svg></div>
+          </div>
+          <p class="under">Material3 on Skia, 30 of 30</p>
+        </div>
+      </div>
+
+      <div class="policy">
+        <span class="enter" style="--i:3"><span class="y">✓</span>Play review: passed</span>
+        <span class="p enter" style="--i:4"><b>App Store:</b>&nbsp;built for guideline 2.5.2, submission pending</span>
+      </div>
+
+      <aside class="notes">
+        <p>⏱ 22:00 → 24:30 · <b>[B]</b> · no clicks, builds itself</p>
+        <ul>
+          <li>Same bytes, same key as the Android app. No second compiler.</li>
+          <li>Android: Compose, the thing on Play.</li>
+          <li>★ "Compose Multiplatform can't produce SwiftUI views. So we wrote a walker that does." Dynamic Type, VoiceOver, native scroll.</li>
+          <li>CMP: Material3 on Skia, all 30 components, parity-tested.</li>
+          <li>Play: interpreted code in a VM is the allowed lane.</li>
+          <li>App Store: say "pending" out loud. Canvas isn't on SwiftUI yet.</li>
+        </ul>
+        <p>→ HANDOVER: "Real apps aren't one screen. [A]?"</p>
+        <p><i>Drop real screenshots at media/android.png, media/ios-swiftui.png, media/ios-cmp.png (portrait 3:5). They replace the drawn phones automatically.</i></p>
+      </aside>
+    </section>
+
+    <!-- 19 · SCALE + ROLLBACK ============================================= -->
+    <section class="s s-scale" data-background-color="#1d1442">
+      <div class="dots fade-down"></div>
+      <svg class="art" data-art="line" data-cols="4" data-rows="2" data-cell="100" data-seed="133" data-mask="rect" style="right:-20px; top:-20px; width:400px; height:200px"></svg>
+      <div class="label">At scale</div>
+      <h2>Many bundles. One signed graph.</h2>
+      <div class="wrap">
+        <div>
+          <div class="graph-box">
+            <svg class="graph" viewBox="0 0 1000 560" aria-hidden="true">
+              <g>
+                <path class="wire stroke" pathLength="1" d="M210 120 C 330 120, 300 262, 398 266" marker-end="url(#tip)"/>
+                <path class="wire stroke" pathLength="1" d="M210 440 C 330 440, 300 298, 398 294" marker-end="url(#tip)"/>
+              </g>
+              <g>
+                <path class="wire stroke" pathLength="1" d="M850 120 C 740 120, 770 262, 682 266" marker-end="url(#tip)"/>
+                <path class="wire stroke" pathLength="1" d="M850 440 C 740 440, 770 298, 682 294" marker-end="url(#tip)"/>
+              </g>
+            </svg>
+            <span class="sticker s-yellow auto" style="left:17.0%; top:21.43%; --r:-4deg; --i:0">checkout.ktx<i class="tag s-white" style="--t:5deg">feature</i></span>
+            <span class="sticker s-pink auto" style="left:17.0%; top:78.57%; --r:3deg; --i:1">offers.ktx<i class="tag s-white" style="--t:-4deg">feature</i></span>
+            <span class="sticker s-grad hero" style="left:54.0%; top:50.00%; --r:-2deg">main.ktx<i class="tag s-yellow" style="--t:6deg">expect</i></span>
+            <span class="sticker s-teal auto" style="left:86.0%; top:21.43%; --r:4deg; --i:0">android<i class="tag s-white" style="--t:-5deg">actual</i></span>
+            <span class="sticker s-white auto" style="left:86.0%; top:78.57%; --r:-3deg; --i:1">ios<i class="tag s-teal" style="--t:5deg">actual</i></span>
+          </div>
+          <p class="gcap cap enter" style="--i:2"><code>expect</code> / <code>actual</code>, at the bundle boundary. Signed and switched on as one.</p>
+        </div>
+        <div class="ladder">
+          <div class="r enter" style="--i:2"><span class="i disc s-yellow" style="--r:-6deg"><svg class="ic" aria-hidden="true"><use href="#i-gauge"/></svg></span><div><b>Canary</b><p class="cap">1% → 25% → 100%, per device</p><div class="meter"><i></i></div></div></div>
+          <div class="r enter" style="--i:3"><span class="i disc s-pink" style="--r:5deg"><svg class="ic" aria-hidden="true"><use href="#i-power"/></svg></span><div><b>Kill switch</b><p class="cap">pin a bundle, revoke a key</p></div></div>
+          <div class="r enter" style="--i:4"><span class="i disc s-orange" style="--r:-4deg"><svg class="ic" aria-hidden="true"><use href="#i-rewind"/></svg></span><div><b>Automatic rollback</b><p class="cap">a crash returns to the last good one</p></div></div>
+          <div class="r big enter" style="--i:5"><span class="i disc s-teal" style="--r:6deg"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg></span><div><b>Native fallback, always</b><p class="cap">bad or missing: your native screen</p></div></div>
+        </div>
+      </div>
+      <p class="plane enter" style="--i:6">No control plane. <span>Your CDN, your remote config, your rules.</span></p>
+      <aside class="notes">
+        <p>⏱ 24:30 → 26:30 · <b>[A]</b> · no clicks, builds itself</p>
+        <ul>
+          <li>Feature teams ship their own bundle; <code>main</code> imports them by name.</li>
+          <li>★ "It's <code>expect</code>/<code>actual</code>, at the bundle boundary." One signed manifest, never half a graph.</li>
+          <li>Canary: a fixed bucket per install. Pause at 1%.</li>
+          <li>Kill switch, then rollback, with a blocklist so it never loops.</li>
+          <li>Slow down. This answers the architect's question.</li>
+          <li>Design principle: a crash in a config SDK must never disarm your kill switch.</li>
+        </ul>
+        <p>→ "Which brings us to when you should NOT use this."</p>
+      </aside>
+    </section>
+
+    <!-- 20 · WHEN NOT TO USE THIS ========================================= -->
+    <section class="s kotlin s-not" data-background-color="#7f52ff">
+      <svg class="art" data-art="solid" data-cols="5" data-rows="2" data-cell="100" data-seed="97" data-mask="rect" data-fills="url(#gSun),url(#gWarm),url(#gPink)" style="right:-30px; bottom:-30px; width:500px; height:200px"></svg>
+      <div class="label">Honestly</div>
+      <h2>When not to use this</h2>
+      <div class="nots">
+        <div class="row enter" style="--i:0"><div class="q"><svg class="ic q-ic" aria-hidden="true"><use href="#i-text"/></svg><span>Only need copy and layout?</span></div><div class="a">Use SDUI or remote config. It's simpler.</div></div>
+        <div class="row enter" style="--i:1"><div class="q"><svg class="ic q-ic" aria-hidden="true"><use href="#i-plug"/></svg><span>Need a platform API the app doesn't expose?</span></div><div class="a">That's an app release. By design.</div></div>
+        <div class="row enter" style="--i:2"><div class="q"><svg class="ic q-ic" aria-hidden="true"><use href="#i-brush"/></svg><span><code>Canvas</code> on the SwiftUI backend?</span></div><div class="a">Not yet. It fails by name, not silently.</div></div>
+      </div>
+      <aside class="notes">
+        <p>⏱ 26:30 → 27:30 · <b>[A]</b> · no clicks, builds itself</p>
+        <ul>
+          <li>This slide is what separates a talk from a pitch.</li>
+          <li>One line each. Don't apologise.</li>
+        </ul>
+        <p>→ HANDOVER: "[B], bring it home."</p>
+      </aside>
+    </section>
+
+    <!-- 21 · THREE THINGS ================================================== -->
+    <section class="s s-three" data-background-color="#8f2cf0">
+      <div class="field" data-field></div>
+      <svg class="art" data-art="line" data-cols="3" data-rows="3" data-cell="110" data-seed="105" data-mask="k" data-stroke="rgba(255,255,255,.7)" style="right:128px; bottom:96px; width:330px; height:330px"></svg>
+      <div class="label">If you remember three things</div>
+      <div class="list">
+        <div class="it enter" style="--i:0"><span class="i">1</span><b>The app is the OS. The server ships programs.</b></div>
+        <div class="it enter" style="--i:1"><span class="i">2</span><b>One annotation. The compiler is the sandbox.</b></div>
+        <div class="it enter" style="--i:2"><span class="i">3</span><b>Signed before parsed. Native fallback, always.</b></div>
+      </div>
+      <p class="callback fragment rise">Your fix is ready today. Your users get it <span>today.</span></p>
+      <aside class="notes">
+        <p>⏱ 27:30 → 28:30 · <b>[B]</b> · CLICK ×1</p>
+        <ul>
+          <li>Ten seconds per line. Don't re-explain.</li>
+          <li><b>▶1</b> ★ Callback to slide 2: "…your users get it <i>today</i>."</li>
+        </ul>
+        <p>→ "Thank you."</p>
+      </aside>
+    </section>
+
+    <!-- 22 · THANK YOU ===================================================== -->
+    <section class="s s-thanks kotlin" data-background-color="#7f52ff" data-background-gradient="linear-gradient(120deg, #7F52FF 0%, #7F52FF 34%, #C711E1 72%, #E44857 100%)">
+      <svg class="art" data-art="line" data-cols="5" data-rows="5" data-cell="112" data-seed="23" data-mask="k" data-stroke="rgba(255,255,255,.72)"></svg>
+      <h2 class="z">Thank you</h2>
+      <div class="row z">
+        <img class="qr" src="media/qr-repo.svg" alt="QR code for github.com/KetoyDev/KetoyVM">
+        <div class="links">
+          <a href="https://github.com/KetoyDev/KetoyVM">github.com/KetoyDev/KetoyVM</a>
+          <a href="https://ketoy.dev">ketoy.dev</a>
+          <p class="cap">Quick start in 15 minutes.</p>
+        </div>
+      </div>
+      <div class="who z"><span>Aditya Shinde</span><span>Co-speaker</span><span>#DevFestChennai</span></div>
+      <aside class="notes">
+        <p>⏱ 28:30 → 30:00 · <b>[A + B]</b></p>
+        <ul>
+          <li>Leave this up for all of Q&amp;A.</li>
+          <li>Point at the QR. Say where to find you.</li>
+        </ul>
+        <p>Q&amp;A prep: SCRIPT.md, original slide 10 (perf, App Store, capability versioning, minAppVersion).</p>
+        <p><i>QR is real (github.com/KetoyDev/KetoyVM). Test it from two phones. Replace "after the talk" with your booth or location.</i></p>
+      </aside>
+    </section>
+
+  </div>
+</div>
+
+<script src="vendor/reveal.js/dist/reveal.js"></script>
+<script src="vendor/reveal.js/plugin/notes/notes.js"></script>
+<script src="js/art.js?v=20261015021016"></script>
+<script src="js/deck.js?v=20261015021016"></script>
+</body>
+</html>

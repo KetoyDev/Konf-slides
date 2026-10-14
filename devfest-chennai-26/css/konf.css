@@ -1,0 +1,657 @@
+/* ------------------------------------------------------------------
+   Kotlin Over the Air — DevFest Chennai 2026
+
+   Visual language taken from the KotlinConf 2024–2026 stage decks:
+   - flat saturated surfaces (violet, Kotlin purple/coral/gradient, ink, graphite, field)
+   - one idea per slide, generous empty space, left-aligned type
+   - monoline geometric line-art clipped to the Kotlin mark
+   - code on violet with a lifted highlight and a speech-bubble callout
+   - diagrams drawn with thin outlines, never glass cards
+
+   Hard rules: nothing the audience reads under 30px on the 1920×1080
+   canvas; no glows, no blur, no blend modes, no ambient loops.
+   ------------------------------------------------------------------ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* surfaces */
+  --violet: #7F52FF;          /* Kotlin purple: the main surface */
+  --violet-deep: #3a1cb8;
+  --violet-lift: #C711E1;     /* Kotlin magenta: lifted code lines */
+  --bubble: #E44857;          /* Kotlin coral: speech bubbles */
+  /* Kotlin brand colours (the three stops of the official mark) */
+  --k-purple: #7F52FF;
+  --k-magenta: #C711E1;
+  --k-coral: #E44857;
+  --k-gradient: linear-gradient(120deg, #7F52FF 0%, #7F52FF 34%, #C711E1 72%, #E44857 100%);
+  --graphite: #36333d;
+  --ink: #1d1442;
+  --graphite-line: rgba(255, 255, 255, .28);
+
+  /* accents */
+  --teal: #45e6c4;
+  --yellow: #ffc61a;
+  --orange: #ff7a1a;
+  --pink: #ff3d8b;
+  --magenta: #c42cf0;
+  --blue: #4a6bff;
+  --red: #ff5a6e;
+
+  --white: #ffffff;
+  --white-80: rgba(255, 255, 255, .82);
+  --white-60: rgba(255, 255, 255, .64);
+  --white-40: rgba(255, 255, 255, .42);
+
+  --display: 'Inter Tight', 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  --text: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ease: cubic-bezier(.22, .8, .2, 1);
+}
+
+html, body, .reveal-viewport { background: var(--violet); }
+
+/* ---------- Base ---------------------------------------------------- */
+
+.reveal {
+  font-family: var(--text);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+.reveal .slides { text-align: left; }
+.reveal .slides section { padding: 0; height: 100%; box-sizing: border-box; }
+.reveal .slides section.s { width: 100%; padding: 104px 128px; display: flex; flex-direction: column; }
+
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--display);
+  color: var(--white);
+  margin: 0;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+.reveal h1 { font-size: 150px; }
+.reveal h2 { font-size: 88px; }
+.reveal h3 { font-size: 52px; letter-spacing: -0.025em; }
+.reveal p { margin: 0; line-height: 1.3; }
+.reveal b, .reveal strong { font-weight: 700; color: inherit; }
+.reveal em { font-style: normal; }
+.reveal code { font-family: var(--mono); font-size: .9em; }
+.reveal a { color: inherit; text-decoration: none; }
+
+.label { font-family: var(--display); font-size: 36px; font-weight: 700; color: var(--teal); letter-spacing: -0.015em; margin-bottom: 22px; }
+.lead { font-size: 46px; font-weight: 500; color: var(--white-80); letter-spacing: -0.02em; line-height: 1.28; }
+.cap { font-size: 32px; color: var(--white-60); line-height: 1.3; }
+.mono { font-family: var(--mono); }
+
+/* Big statement slides */
+.st { justify-content: center; }
+.st h2 { font-size: 132px; line-height: .98; letter-spacing: -0.045em; max-width: 1500px; }
+.st .lead { margin-top: 56px; max-width: 1340px; }
+.st .label { margin-bottom: 36px; }
+.st h2.mantra { font-size: 104px; max-width: none; line-height: 1.06; }
+.st h2.mantra span { color: var(--teal); }
+
+.z { position: relative; z-index: 2; }
+.reveal .slides section.s > :not(.art):not(.field):not(.dots):not(.pen-layer):not(.step-dots):not(.demo-video):not(.illus):not(.trigger):not(aside) { position: relative; z-index: 2; }
+
+/* Icons: one monoline set, 48px grid, coloured by currentColor. */
+.ic { width: 48px; height: 48px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; overflow: visible; }
+.num { display: block; font-family: var(--mono); font-size: 30px; font-weight: 500; color: var(--white-60); letter-spacing: .02em; }
+.kotlin .label { color: rgba(255,255,255,.9); }
+.kotlin.coral .label { color: #3b0a14; }
+
+/* ---------- Artwork --------------------------------------------------- */
+
+.art { position: absolute; z-index: 1; overflow: visible; pointer-events: none; }
+.art.ghost { z-index: 0; }
+
+/* Backdrop masks: texture lives at the edges and fades out before the text. */
+.fade-right { -webkit-mask-image: linear-gradient(to left, #000 0%, #000 12%, transparent 44%); mask-image: linear-gradient(to left, #000 0%, #000 12%, transparent 44%); }
+.fade-tr { -webkit-mask-image: radial-gradient(120% 120% at 100% 0%, #000 30%, transparent 72%); mask-image: radial-gradient(120% 120% at 100% 0%, #000 30%, transparent 72%); }
+.fade-left-half { -webkit-mask-image: linear-gradient(to right, #000 0%, #000 42%, transparent 60%); mask-image: linear-gradient(to right, #000 0%, #000 42%, transparent 60%); }
+.fade-down { -webkit-mask-image: linear-gradient(#000 0%, rgba(0,0,0,.5) 30%, transparent 62%); mask-image: linear-gradient(#000 0%, rgba(0,0,0,.5) 30%, transparent 62%); }
+.dots { position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: radial-gradient(rgba(255,255,255,.26) 1.6px, transparent 2px); background-size: 40px 40px; background-position: 20px 20px; }
+.reveal section.present:not(.waiting):not(.art-wait) .dots { animation: dotsIn 1.4s var(--ease) both; }
+@keyframes dotsIn { from { opacity: 0; background-position: 20px 60px; } to { opacity: 1; background-position: 20px 20px; } }
+.art.ghost .ln { stroke-width: 2; }
+.art[data-art="rings"] .ln, .art[data-art="waves"] .ln, .art[data-art="hatch"] .ln { stroke-width: 1.8; }
+.reveal section.present:not(.waiting):not(.art-wait) .art[data-art="rings"] .ln { animation-duration: 1.8s; }
+.reveal section.present:not(.waiting):not(.art-wait) .art.ghost .ln { animation-duration: 2.2s; }
+.art .ln { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1 2; stroke-dashoffset: 1.02; }
+.reveal section.present:not(.waiting):not(.art-wait) .art .ln { animation: draw 1.5s var(--ease) var(--d, 0s) forwards; }
+.art .tile { transform-box: fill-box; transform-origin: center; opacity: 0; }
+.reveal section.present:not(.waiting):not(.art-wait) .art.still .tile, .art.still .tile { animation: none; opacity: 1; }
+.reveal section.present:not(.waiting):not(.art-wait) .art .tile { animation: tile .9s var(--ease) var(--d, 0s) forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes tile { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+
+/* Gradient field (statement / demo / closing): a few huge soft shapes. */
+.field { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.field svg { width: 100%; height: 100%; display: block; }
+.field .shape { transform-box: view-box; transform-origin: 70% 30%; }
+.reveal section.present:not(.waiting) .field .shape { animation: settle 1.6s var(--ease) both; }
+.reveal section.present:not(.waiting) .field .shape:nth-child(2) { animation-delay: .08s; }
+.reveal section.present:not(.waiting) .field .shape:nth-child(3) { animation-delay: .16s; }
+.reveal section.present:not(.waiting) .field .shape:nth-child(4) { animation-delay: .24s; }
+@keyframes settle { from { transform: scale(1.08); } to { transform: none; } }
+
+/* ---------- Fragments ------------------------------------------------- */
+
+.reveal .fragment { transition: opacity .45s var(--ease), transform .55s var(--ease); }
+.reveal .fragment.rise { opacity: 0; transform: translateY(24px); }
+.reveal .fragment.rise.visible { opacity: 1; transform: none; }
+.reveal .fragment.fade { opacity: 0; }
+.reveal .fragment.fade.visible { opacity: 1; }
+.reveal .fragment.light { opacity: .22; filter: saturate(0); visibility: inherit; }
+.reveal .fragment.light.visible { opacity: 1; filter: none; }
+.reveal .fragment.trigger { position: absolute; width: 0; height: 0; overflow: hidden; opacity: 1; }
+.reveal .fragment.draw-in { opacity: 1; }
+.reveal .fragment.draw-in .stroke { stroke-dasharray: 1 2; stroke-dashoffset: 1.02; transition: stroke-dashoffset 1s var(--ease); }
+.reveal .fragment.draw-in.visible .stroke { stroke-dashoffset: 0; }
+.reveal .fragment.shake.visible { animation: shake .45s ease-out .15s 1; }
+@keyframes shake { 0%, 100% { transform: none; } 25% { transform: translateX(-10px); } 50% { transform: translateX(8px); } 75% { transform: translateX(-4px); } }
+
+/* Entry choreography: items that used to be one click each now arrive on
+   their own, staggered by --i, when the slide appears. */
+.reveal section.present:not(.waiting) .enter { animation: drawIn .62s var(--ease) calc(var(--i, 0) * 110ms + .12s) both; }
+@keyframes drawIn { from { clip-path: inset(-28px 100% -28px -28px); } to { clip-path: inset(-28px -28px -28px -28px); } }
+.reveal section.present:not(.waiting) .sticker.auto { animation: stickIn .6s cubic-bezier(.3, 1.6, .45, 1) calc(var(--i, 0) * 80ms + .25s) both; }
+@keyframes stickIn {
+  from { opacity: 0; transform: translate(-50%, -50%) rotate(calc(var(--r, 0deg) * 3)) scale(1.3); }
+  to   { opacity: 1; transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(1); }
+}
+.draw-auto .stroke { stroke-dasharray: 1 2; stroke-dashoffset: 1.02; }
+.reveal section.present:not(.waiting) .draw-auto .stroke { animation: draw 1s var(--ease) .35s forwards; }
+.reveal section.present:not(.waiting) .graph .wire.stroke { animation: draw 1.1s var(--ease) .5s forwards; }
+.reveal section.present:not(.waiting) .err-line.enter-shake { animation: drawIn .6s var(--ease) .45s both, shake .45s ease-out 1.1s 1; }
+
+/* ---------- 01 Title -------------------------------------------------- */
+
+.s-title { justify-content: space-between; }
+.s-title .event { font-family: var(--display); font-size: 34px; font-weight: 600; letter-spacing: -0.01em; }
+.s-title h1 { font-size: 168px; line-height: .94; letter-spacing: -0.05em; max-width: 1000px; }
+.s-title .lead { margin-top: 48px; color: var(--white); max-width: 900px; }
+.s-title .who { display: flex; gap: 72px; font-size: 36px; font-weight: 600; }
+.s-title .who span small { display: block; font-size: 30px; font-weight: 500; color: var(--white-80); margin-top: 6px; }
+.s-title .art { right: 120px; top: 150px; width: 780px; height: 780px; }
+
+/* ---------- 02 Problem ------------------------------------------------ */
+
+.s-problem h2 { font-size: 104px; letter-spacing: -0.045em; }
+.s-problem h2 .late { color: var(--yellow); }
+.timeline { position: relative; margin-top: 96px; height: 200px; }
+.timeline .rail { position: absolute; left: 0; right: 0; top: 22px; height: 3px; background: var(--white-40); }
+.timeline .rail i { position: absolute; inset: 0; background: var(--white); transform-origin: left; transform: scaleX(0); transition: transform 2.4s var(--ease); }
+.timeline.go .rail i { transform: scaleX(1); }
+.timeline .step { position: absolute; top: 0; transform: translateX(-24px); }
+.timeline .step.late { left: auto !important; right: 0; transform: none; text-align: right; }
+.timeline .step.late .node { margin-left: auto; }
+.timeline .node { width: 48px; height: 48px; border-radius: 50%; border: 3px solid var(--white-40); background: var(--violet); box-sizing: border-box; transition: border-color .4s, background .4s, transform .5s var(--ease); }
+.timeline .step.on .node { border-color: var(--white); background: var(--white); }
+.timeline .step.late.on .node { border-color: var(--yellow); background: var(--yellow); transform: scale(1.35); }
+.timeline .t { margin-top: 26px; font-size: 36px; font-weight: 700; opacity: .4; transition: opacity .4s; white-space: nowrap; }
+.timeline .t small { display: block; font-size: 32px; font-weight: 500; color: var(--white-80); margin-top: 4px; }
+.timeline .step.on .t { opacity: 1; }
+.timeline .step.late .t small { color: var(--yellow); }
+.s-problem .who-ships { margin-top: 40px; display: grid; grid-template-columns: 640px 1fr; row-gap: 22px; font-size: 38px; }
+.s-problem .who-ships .k { color: var(--white-60); }
+.s-problem .who-ships .v { font-weight: 600; }
+.s-problem .kq { margin-top: 56px; font-family: var(--display); font-size: 76px; font-weight: 700; letter-spacing: -0.04em; }
+.s-problem .kq span { color: var(--yellow); }
+
+/* ---------- 04 Describing vs shipping (diagram) ----------------------- */
+
+.s-vs .lanes { margin-top: 72px; display: grid; grid-template-columns: 380px repeat(3, 1fr); column-gap: 56px; row-gap: 48px; align-items: center; }
+.s-vs .lane-h { font-family: var(--display); font-size: 40px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.s-vs .lane-h small { display: block; font-family: var(--text); font-size: 30px; font-weight: 500; color: var(--white-60); margin-top: 6px; letter-spacing: 0; }
+.s-vs .lane-h.ota { color: var(--teal); }
+.s-vs .lane-ic { display: block; width: 44px; height: 44px; margin-bottom: 12px; color: var(--white-60); }
+.s-vs .lane-h.ota .lane-ic { color: var(--teal); }
+.node-box { padding-right: 70px !important; }
+.node-box .box-ic { position: absolute; right: 20px; top: 20px; width: 36px; height: 36px; color: var(--white-60); }
+.node-box.solid .box-ic { color: var(--teal); }
+.node-box.solid.end .box-ic { color: #10233a; }
+.node-box { position: relative; border: 2.5px solid var(--white-40); border-radius: 26px; padding: 26px 30px; min-height: 150px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+.node-box.dashed { border-style: dashed; }
+.s-vs .node-box { background: var(--ink); }
+.s-vs .node-box.solid.end { background: var(--teal); }
+.node-box.solid { border-color: var(--teal); }
+.node-box.solid.end { background: var(--teal); color: #10233a; border-color: var(--teal); }
+.node-box .t { font-size: 36px; font-weight: 700; line-height: 1.1; }
+.node-box .t code { font-weight: 500; }
+.node-box small { font-size: 30px; color: var(--white-60); margin-top: 6px; }
+.node-box.solid.end small { color: rgba(16,35,58,.75); }
+.node-box:not(.last)::after { content: ''; position: absolute; right: -46px; top: 50%; width: 36px; height: 2.5px; background: var(--white-40); }
+.node-box:not(.last)::before { content: ''; position: absolute; right: -48px; top: calc(50% - 7px); border-left: 12px solid var(--white-40); border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.s-vs .verdict { margin-top: 84px; font-family: var(--display); font-size: 60px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; }
+.s-vs .verdict span { color: var(--teal); }
+.s-vs .capdef { margin-top: 22px; }
+.s-vs .capdef b { color: var(--white); }
+
+/* ---------- Pipeline map (06) ----------------------------------------- */
+
+.s-map .map { margin-top: 110px; position: relative; display: flex; justify-content: space-between; }
+.s-map .map .wire { position: absolute; left: 90px; right: 90px; top: 89px; height: 2.5px; background: var(--white-40); }
+.s-map .map .wire .packet { position: absolute; left: 0; top: -11px; width: 24px; height: 24px; border-radius: 50%; background: var(--yellow); opacity: 0; }
+.reveal .s-map .map .wire.visible .packet { animation: travel 2.6s var(--ease) forwards; }
+.reveal .s-map .wire.fragment { opacity: 1; transform: none; }
+@keyframes travel { 0% { left: 0; opacity: 0; } 6% { opacity: 1; } 100% { left: calc(100% - 24px); opacity: 1; } }
+.s-map .stop { position: relative; width: 180px; text-align: center; z-index: 1; }
+.s-map .stop .o { width: 180px; height: 180px; border-radius: 50%; border: 2.5px solid var(--white); background: var(--graphite); display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.s-map .stop .o .ic { width: 76px; height: 76px; stroke-width: 2.4; }
+.s-map .stop .num { margin-top: 26px; }
+.s-map .stop.hot .o { background: var(--teal); color: #10233a; border-color: var(--teal); }
+.s-map .stop b { display: block; margin-top: 4px; font-family: var(--display); font-size: 44px; letter-spacing: -0.02em; white-space: nowrap; }
+.s-map .stop small { display: block; margin-top: 8px; font-size: 30px; color: var(--white-60); white-space: nowrap; }
+.s-map .define { margin-top: 130px; }
+.s-map.kotlin .map .wire { background: rgba(255,255,255,.6); }
+.s-map.kotlin .stop .o { background: var(--k-purple); border-color: #fff; }
+.s-map.kotlin .stop.hot .o { background: var(--k-coral); border-color: var(--k-coral); color: #fff; }
+.s-map.kotlin .stop small, .s-map.kotlin .num, .s-map.kotlin .cap { color: rgba(255,255,255,.9); }
+.s-map.kotlin h2 code { color: #fff; }
+.s-map.kotlin .define b { color: #fff; }
+.s-map .define b { color: var(--white); }
+
+/* ---------- Code slides (violet) -------------------------------------- */
+
+.s-code .label { margin-bottom: 26px; }
+.s-code h2 { font-size: 72px; }
+.code-stage { position: relative; margin-top: 64px; flex: 1; }
+.code {
+  font-family: var(--mono); font-size: 34px; line-height: 58px; font-weight: 500;
+  color: #ddd2ff; white-space: pre; position: relative;
+}
+.code .l { display: block; width: fit-content; padding: 0 18px; margin-left: -18px; border-radius: 16px; position: relative; transition: background-color .5s var(--ease); }
+.code .l.i1 { margin-left: calc(-18px + 2ch); }
+.code .l.i2 { margin-left: calc(-18px + 4ch); }
+.code .l.i3 { margin-left: calc(-18px + 6ch); }
+.code .l.on { background: var(--violet-lift); color: #fff; }
+.code .l.on + .l.on { border-top-left-radius: 0; border-top-right-radius: 0; }
+.code .l.on:has(+ .l.on) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.code .l.dim { color: rgba(221, 210, 255, .45); }
+.code .kw { color: #b6a2ff; }
+.code .on .kw { color: #d6caff; }
+.code .an { color: var(--yellow); }
+.code .fn { color: #ffffff; }
+.code .st { color: #7ef0c6; }
+.code .nu { color: #74e4ff; }
+.code .cm { color: rgba(221, 210, 255, .5); font-style: italic; }
+.code .err { text-decoration: underline wavy var(--red); text-decoration-thickness: 3px; text-underline-offset: 10px; }
+
+.bubble {
+  position: absolute; right: 0; width: 470px; box-sizing: border-box;
+  padding: 32px 38px; border-radius: 30px; background: var(--bubble);
+  font-family: var(--display); font-size: 42px; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em;
+}
+.bubble::before { content: ''; position: absolute; left: -22px; top: 40px; border-right: 24px solid var(--bubble); border-top: 16px solid transparent; border-bottom: 16px solid transparent; }
+.bubble small { display: block; margin-top: 16px; font-family: var(--text); font-size: 32px; font-weight: 500; color: var(--white-80); line-height: 1.3; letter-spacing: -0.01em; }
+.bubble small code { color: #fff; }
+.bubble.err { background: #2b1340; }
+.bubble.err::before { border-right-color: #2b1340; }
+.step-dots { position: absolute; left: 128px; bottom: 80px; display: flex; gap: 14px; }
+.step-dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--white-40); }
+.step-dots i.on { background: var(--white); }
+
+.err-line {
+  position: absolute; left: 0; top: 480px;
+  font-family: var(--mono); font-size: 32px; color: #ffd0d6;
+  padding: 18px 26px; border-radius: 14px; background: #1c1030; border-left: 6px solid var(--red);
+}
+.err-line b { color: var(--red); margin-right: 12px; }
+.err-line u { text-decoration: none; color: #fff; }
+
+/* ---------- Cost ------------------------------------------------------ */
+
+.s-cost .panes { margin-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 96px; }
+.s-cost .fname { font-family: var(--mono); font-size: 30px; color: var(--teal); margin-bottom: 18px; }
+.s-cost .code { font-size: 32px; line-height: 50px; }
+.s-cost .cmd { margin-top: auto; font-size: 36px; color: var(--white-80); }
+.s-cost .cmd code { color: #fff; }
+
+/* ---------- Demo ------------------------------------------------------ */
+
+.s-demo { justify-content: center; }
+.s-demo h2 { font-size: 260px; letter-spacing: -0.06em; line-height: .9; }
+.s-demo .rec { display: inline-flex; align-items: center; gap: 18px; font-family: var(--display); font-size: 36px; font-weight: 700; letter-spacing: .14em; margin-bottom: 32px; }
+.s-demo .rec i { width: 22px; height: 22px; border-radius: 50%; background: var(--white); animation: rec 1.6s ease-in-out infinite; }
+@keyframes rec { 50% { opacity: .2; } }
+.s-demo .flow { max-width: 1000px; margin-top: 64px; display: flex; gap: 28px; align-items: baseline; font-size: 40px; font-weight: 600; flex-wrap: wrap; }
+.s-demo .flow .a { color: var(--white-60); }
+.s-demo .illus { position: absolute; right: 150px; top: 170px; width: 560px; height: 720px; z-index: 1; overflow: visible; }
+.illus .ln { fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1 2; stroke-dashoffset: 1.02; }
+.illus circle.ln { fill: var(--teal); fill-opacity: 0; stroke: var(--teal); }
+.illus .ln.dash { stroke: rgba(255,255,255,.6); }
+.reveal section.present:not(.waiting):not(.art-wait) .illus .ln { animation: draw 1.4s var(--ease) forwards; }
+.reveal section.present:not(.waiting):not(.art-wait) .illus .ln:nth-child(2) { animation-delay: .25s; }
+.reveal section.present:not(.waiting):not(.art-wait) .illus .ln:nth-child(3) { animation-delay: .4s; }
+.reveal section.present:not(.waiting):not(.art-wait) .illus .ln:nth-child(4) { animation-delay: .55s; }
+.reveal section.present:not(.waiting):not(.art-wait) .illus .ln:nth-child(5) { animation-delay: .7s; }
+.reveal section.present:not(.waiting):not(.art-wait) .illus .ln:nth-child(6) { animation: draw 1s var(--ease) .9s forwards, badge .5s ease 1.8s forwards; }
+.reveal section.present:not(.waiting):not(.art-wait) .illus .ln:nth-child(7), .reveal section.present:not(.waiting):not(.art-wait) .illus .ln:nth-child(8) { stroke: #10233a; animation-delay: 1.5s; }
+.reveal section.present:not(.waiting):not(.art-wait) .illus .ln:nth-child(9) { animation-delay: 1.1s; }
+@keyframes badge { to { fill-opacity: 1; } }
+.s-demo .demo-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; z-index: 5; opacity: 0; pointer-events: none; transition: opacity .4s; }
+.s-demo.show-video .demo-video { opacity: 1; }
+
+/* ---------- Bundle (graphite) ----------------------------------------- */
+
+.strip { margin-top: 80px; display: flex; height: 190px; }
+.strip .seg { border: 2.5px solid var(--white-40); margin-left: -2.5px; display: flex; flex-direction: column; justify-content: center; padding: 0 30px; box-sizing: border-box; font-family: var(--display); font-size: 40px; font-weight: 700; letter-spacing: -0.02em; }
+.strip .seg { background-color: var(--graphite); }
+.strip .seg:first-child { border-radius: 26px 0 0 26px; margin-left: 0; }
+.strip .seg:last-child { border-radius: 0 26px 26px 0; }
+.strip .seg small { font-family: var(--text); font-size: 30px; font-weight: 500; color: var(--white-60); margin-top: 6px; letter-spacing: 0; }
+.strip .seg.magic { flex: 0 0 230px; font-family: var(--mono); }
+.strip .seg.hdr { flex: 0 0 240px; }
+.strip .seg.man { flex: 1; }
+.strip .seg.cd { flex: 1.6; background: repeating-linear-gradient(90deg, transparent 0 22px, rgba(255,255,255,.06) 22px 24px); }
+.strip .seg .sig-t { display: flex; align-items: center; gap: 12px; }
+.strip .seg .sig-t .ic { width: 38px; height: 38px; }
+.strip .seg.sig { flex: 0 0 320px; transition: background .6s var(--ease), color .6s, border-color .6s; }
+.s-bundle.sig-on .strip .seg.sig { background: var(--teal); border-color: var(--teal); color: #10233a; }
+.s-bundle.sig-on .strip .seg.sig small { color: rgba(16,35,58,.75); }
+.strip.build .seg { opacity: 0; transform: translateY(18px); transition: opacity .4s var(--ease), transform .5s var(--ease); }
+.reveal section.present:not(.waiting) .strip.build .seg { opacity: 1; transform: none; }
+.reveal section.present:not(.waiting) .strip.build .seg:nth-child(2) { transition-delay: .08s; }
+.reveal section.present:not(.waiting) .strip.build .seg:nth-child(3) { transition-delay: .16s; }
+.reveal section.present:not(.waiting) .strip.build .seg:nth-child(4) { transition-delay: .24s; }
+.reveal section.present:not(.waiting) .strip.build .seg:nth-child(5) { transition-delay: .32s; }
+
+.sig-note { margin-top: 22px; align-self: flex-end; color: var(--teal); font-size: 32px; font-weight: 600; }
+.numbers { margin-top: 90px; display: grid; grid-template-columns: 1fr 1fr 1.25fr; }
+.numbers .n { padding: 0 48px; border-left: 2.5px solid var(--graphite-line); }
+.numbers .n:first-child { padding-left: 0; border-left: 0; }
+.numbers .v { font-family: var(--display); font-size: 132px; font-weight: 700; letter-spacing: -0.05em; line-height: 1; }
+.numbers .v .u { font-size: 64px; letter-spacing: -0.02em; margin-left: 8px; }
+.numbers .n.hero .v { color: var(--teal); }
+.numbers .cap { margin-top: 16px; }
+
+/* ---------- Verify ---------------------------------------------------- */
+
+.steps { margin-top: 90px; position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; }
+.steps .rail { position: absolute; left: 48px; right: 48px; top: 47px; height: 2.5px; background: var(--white-40); z-index: 0; }
+.steps .st-i { position: relative; z-index: 1; }
+.steps .dot { width: 96px; height: 96px; border-radius: 50%; border: 2.5px solid var(--white); background: var(--ink); box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+.steps .dot .ic { width: 46px; height: 46px; }
+.steps .num { margin-top: 30px; }
+.steps .st-i.first .dot { background: var(--teal); border-color: var(--teal); color: #10233a; }
+.steps .st-i.last .dot { background: var(--white); color: var(--graphite); }
+.steps .st-i b { display: block; margin-top: 6px; font-family: var(--display); font-size: 48px; letter-spacing: -0.025em; line-height: 1.05; }
+.steps .st-i .cap { margin-top: 12px; }
+.steps .st-i.last b { font-size: 56px; }
+.tamper { margin-top: auto; display: flex; align-items: center; gap: 28px; font-size: 40px; font-weight: 600; }
+.tamper .bar { width: 6px; align-self: stretch; background: var(--red); border-radius: 3px; }
+.tamper span { color: var(--red); }
+
+/* ---------- Runtime --------------------------------------------------- */
+
+.s-vm .wrap { margin-top: 36px; flex: 1; display: grid; grid-template-columns: 1000px 1fr; gap: 60px; align-items: center; }
+.ring { position: relative; width: 1000px; height: 640px; }
+.ring > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ring .wall { fill: rgba(255,255,255,.05); stroke: rgba(255,255,255,.75); stroke-width: 3; }
+.ring .halo { fill: none; stroke: rgba(255,255,255,.35); stroke-width: 2; stroke-dasharray: 3 10; stroke-linecap: round; }
+.ring .spokes path { fill: none; stroke: rgba(255,255,255,.55); stroke-width: 2.5; }
+.ring .wall-label { font-family: var(--display); font-size: 30px; font-weight: 800; letter-spacing: .24em; fill: #fff; stroke: var(--violet); stroke-width: 16px; paint-order: stroke; }
+.ring .core { position: absolute; left: 50%; top: 50%; width: 250px; height: 250px; transform: translate(-50%, -50%); border-radius: 50%; background: linear-gradient(135deg, #C711E1 0%, #E44857 100%); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 12px rgba(255,255,255,.12); z-index: 2; }
+.ring .core b { font-family: var(--display); font-size: 54px; font-weight: 800; letter-spacing: -0.04em; }
+
+/* Stickers: the deck's "Vanakkam · it's · DevFest" language, used for the sandbox chart. */
+.sticker {
+  position: absolute; z-index: 3;
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+  padding: 14px 30px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--display); font-size: 32px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1;
+}
+.sticker.s-yellow { background: var(--yellow); color: #2a1a00; }
+.sticker.s-pink   { background: var(--pink); color: #fff; }
+.sticker.s-grad   { background: linear-gradient(90deg, #C711E1, #E44857); color: #fff; }
+.sticker.s-teal   { background: var(--teal); color: #0f2a33; }
+.sticker.s-orange { background: var(--orange); color: #2a1200; }
+.sticker.s-white  { background: #fff; color: var(--violet-deep); }
+.sticker.s-no     { background: #24186a; color: rgba(255,255,255,.72); padding-left: 40px; }
+.sticker .stamp { position: absolute; left: -16px; top: -14px; width: 44px; height: 44px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; transform: rotate(calc(var(--r, 0deg) * -1)); }
+.sticker .stamp .ic { width: 26px; height: 26px; color: #fff; stroke-width: 3.4; }
+
+/* "Stick" build: drops in a little bigger and more tilted, springs into place. */
+.reveal .sticker.fragment.stick {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(calc(var(--r, 0deg) * 3)) scale(1.3);
+  transition: opacity .18s ease calc(var(--i, 0) * 70ms), transform .6s cubic-bezier(.3, 1.6, .45, 1) calc(var(--i, 0) * 70ms);
+}
+.reveal .sticker.fragment.stick.visible { opacity: 1; transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(1); }
+.s-vm .facts { display: flex; flex-direction: column; }
+.s-vm .fact { padding: 30px 0; border-top: 2.5px solid rgba(255,255,255,.22); }
+.s-vm .fact:first-child { border-top: 0; padding-top: 0; }
+.s-vm .fact b { display: block; font-family: var(--display); font-size: 48px; letter-spacing: -0.025em; line-height: 1.05; }
+.s-vm .fact .cap { margin-top: 8px; }
+.s-vm .capline { margin-top: 32px; }
+.s-vm .capline code { color: var(--teal); }
+.s-vm .capline b { color: var(--white); }
+
+/* ---------- iOS (violet, devices) ------------------------------------- */
+
+.devices { margin-top: 48px; display: flex; gap: 120px; justify-content: center; align-items: flex-end; }
+.device .plat { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; font-family: var(--display); font-size: 34px; font-weight: 700; letter-spacing: -0.01em; }
+.device .plat svg { width: 44px; height: 44px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.device .plat small { font-family: var(--text); font-size: 30px; font-weight: 500; color: var(--white-60); letter-spacing: 0; }
+.device .under { margin-top: 22px; font-size: 30px; color: var(--white-80); }
+.phone { position: relative; width: 320px; height: 500px; border-radius: 40px; border: 3px solid rgba(255,255,255,.55); background: #2b2a31; overflow: hidden; box-sizing: border-box; font-family: var(--text); }
+.phone .shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 4; }
+.phone .sb { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 26px; font-size: 20px; font-weight: 600; color: #e9e8ee; }
+.phone .sb .isl { width: 96px; height: 28px; border-radius: 14px; background: #000; }
+.phone .sb .ic { display: flex; gap: 6px; align-items: center; }
+.phone .sb .ic i { width: 18px; height: 11px; border-radius: 3px; background: #e9e8ee; display: block; }
+.phone .sb .ic i:first-child { width: 14px; border-radius: 2px 2px 0 0; clip-path: polygon(0 100%, 100% 0, 100% 100%); }
+.phone .top { text-align: center; font-size: 22px; color: #cfcdd8; padding: 10px 0 16px; border-bottom: 1px solid rgba(255,255,255,.12); }
+.phone.ios-native .top { text-align: left; padding: 6px 24px 14px; font-size: 40px; font-weight: 800; color: #fff; letter-spacing: -0.02em; border-bottom: 0; }
+.phone .stickers { height: 134px; position: relative; border-bottom: 1px solid rgba(255,255,255,.12); }
+.phone .stk { position: absolute; padding: 10px 22px; border-radius: 999px; font-family: var(--display); font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+.phone .stk.a { left: 26px; top: 22px; background: var(--yellow); color: #2a1a00; transform: rotate(-6deg); }
+.phone .stk.b { left: 196px; top: 26px; background: var(--pink); color: #fff; transform: rotate(4deg); }
+.phone .stk.c { left: 70px; top: 76px; background: linear-gradient(90deg, #8a3bff, #ff3d8b); color: #fff; }
+.phone .row { display: flex; justify-content: space-between; align-items: center; padding: 0 24px; height: 58px; font-size: 22px; color: #e9e8ee; border-bottom: 1px solid rgba(255,255,255,.12); }
+.phone .row .chk { width: 22px; height: 22px; border-radius: 6px; border: 2px solid #a7a4b3; box-sizing: border-box; }
+.phone .row .chk.done { background: var(--teal); border-color: var(--teal); }
+.phone.ios-native .row .chk { border-radius: 50%; }
+.phone.ios-native .row .chk.done { background: #0a84ff; border-color: #0a84ff; }
+.phone .row .sw { width: 50px; height: 28px; border-radius: 14px; background: var(--violet-lift); position: relative; }
+.phone .row .sw::after { content: ''; position: absolute; right: 3px; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; }
+.phone.ios-native .row .sw { background: #34c759; }
+.phone .search { display: flex; justify-content: space-between; align-items: center; padding: 0 24px; height: 58px; font-size: 22px; color: #a7a4b3; }
+.phone .search svg { width: 22px; height: 22px; fill: none; stroke: #a7a4b3; stroke-width: 2.2; }
+.s-ios .policy { margin-top: 52px; display: flex; gap: 72px; justify-content: center; font-size: 34px; font-weight: 600; }
+.s-ios .policy span { display: flex; gap: 14px; align-items: baseline; }
+.s-ios .policy .y { color: var(--teal); }
+.s-ios .policy .p { color: var(--white-60); font-weight: 500; }
+.s-ios .policy .p b { color: var(--white); font-weight: 600; }
+.s-ios .file { margin-top: 18px; font-family: var(--mono); font-size: 32px; color: var(--white-80); }
+.s-ios .file b { color: #fff; }
+
+/* ---------- Scale (graphite) ------------------------------------------ */
+
+.s-scale .wrap { margin-top: 24px; flex: 1; display: grid; grid-template-columns: 1fr 640px; gap: 96px; }
+.graph-box { position: relative; width: 100%; aspect-ratio: 1000 / 560; }
+.graph-box .graph { position: absolute; inset: 0; width: 100%; height: 100%; }
+.graph-box .sticker { font-size: 40px; padding: 18px 34px; }
+.graph-box .sticker.hero { font-size: 52px; padding: 24px 44px; z-index: 4; }
+/* small tag stuck on a sticker's corner, like "it's" next to "DevFest" */
+.sticker .tag { position: absolute; right: -22px; top: -26px; transform: rotate(var(--t, 4deg)); padding: 6px 16px; border-radius: 999px; font-family: var(--mono); font-style: normal; font-size: 28px; font-weight: 700; letter-spacing: 0; box-shadow: 0 0 0 3px var(--ink); }
+.sticker .tag.s-white { background: #fff; color: var(--violet-deep); }
+.sticker .tag.s-yellow { background: var(--yellow); color: #2a1a00; }
+.sticker .tag.s-teal { background: var(--teal); color: #0f2a33; }
+.graph { width: 100%; height: auto; overflow: visible; }
+.graph .box { fill: none; stroke: var(--white-40); stroke-width: 2.5; }
+.graph .box.main { fill: var(--teal); stroke: var(--teal); }
+.graph .box.plat { stroke: var(--white); stroke-dasharray: 10 8; }
+.graph text { fill: #fff; font-family: var(--display); font-weight: 700; font-size: 40px; letter-spacing: -0.02em; }
+.graph text.s { font-family: var(--text); font-size: 30px; font-weight: 500; fill: var(--white-60); letter-spacing: 0; }
+.graph text.k { font-family: var(--mono); font-size: 32px; font-weight: 700; fill: var(--yellow); }
+.graph .box.main + text, .graph .on-teal { fill: #10233a; }
+.graph text.k.on-teal { fill: #10233a; }
+.graph .wire { fill: none; stroke: var(--white-60); stroke-width: 2.5; }
+.graph .wire.stroke { stroke-dasharray: 1 2; stroke-dashoffset: 1.02; }
+.s-scale .gcap { margin-top: 20px; }
+.s-scale .gcap code { color: var(--yellow); }
+.ladder { display: flex; flex-direction: column; }
+.ladder .r { display: grid; grid-template-columns: 96px 1fr; padding: 18px 0; align-items: center; border-top: 2.5px solid var(--graphite-line); }
+.ladder .r:first-child { border-top: 0; padding-top: 0; }
+.ladder .r .i { color: var(--white-60); padding-top: 2px; }
+.ladder .r .i .ic { width: 52px; height: 52px; }
+.ladder .r .i.disc { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transform: rotate(var(--r, 0deg)); padding: 0; }
+.ladder .r .i.disc .ic { width: 36px; height: 36px; stroke-width: 2.8; }
+.ladder .r .i.s-yellow { background: var(--yellow); color: #2a1a00; }
+.ladder .r .i.s-pink { background: var(--pink); color: #fff; }
+.ladder .r .i.s-orange { background: var(--orange); color: #2a1200; }
+.ladder .r .i.s-teal { background: var(--teal); color: #0f2a33; }
+.ladder .r b { font-family: var(--display); font-size: 44px; letter-spacing: -0.025em; display: block; line-height: 1.05; }
+.ladder .r .cap { margin-top: 6px; }
+.ladder .r.big b { font-size: 48px; color: var(--teal); white-space: nowrap; }
+.ladder .r.big .i:not(.disc) { color: var(--teal); }
+.ladder .meter { margin-top: 16px; height: 8px; border-radius: 4px; background: rgba(255,255,255,.14); overflow: hidden; }
+.ladder .meter i { display: block; height: 100%; width: 0; background: var(--yellow); border-radius: 4px; }
+.reveal section.present:not(.waiting) .ladder .meter i { animation: rollout 3.2s var(--ease) .9s forwards; }
+@keyframes rollout { 0% { width: 0; } 25% { width: 2%; } 45% { width: 2%; } 65% { width: 25%; } 82% { width: 25%; } 100% { width: 100%; } }
+.s-scale .plane { margin-top: 16px; font-family: var(--display); font-size: 48px; font-weight: 700; letter-spacing: -0.03em; }
+.s-scale .plane span { color: var(--white-60); }
+
+/* ---------- When not (violet) ----------------------------------------- */
+
+.nots { margin-top: 72px; }
+.nots .row { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; padding: 44px 0; border-top: 2.5px solid rgba(255,255,255,.22); align-items: baseline; }
+.nots .row:last-child { border-bottom: 2.5px solid rgba(255,255,255,.22); }
+.nots .q { font-family: var(--display); font-size: 50px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; display: flex; gap: 28px; align-items: flex-start; }
+.nots .q-ic { width: 54px; height: 54px; color: var(--teal); margin-top: 2px; }
+.nots .q code { color: var(--teal); font-size: .86em; }
+.nots .a { font-size: 42px; color: var(--white-80); }
+
+/* ---------- Three things ---------------------------------------------- */
+
+.s-three .list { margin-top: 64px; display: flex; flex-direction: column; gap: 52px; }
+.s-three .it { display: grid; grid-template-columns: 120px 1fr; align-items: baseline; }
+.s-three .it .i { font-family: var(--display); font-size: 72px; font-weight: 700; color: var(--teal); letter-spacing: -0.04em; }
+.s-three .it b { font-family: var(--display); font-size: 80px; letter-spacing: -0.045em; line-height: 1.02; }
+.s-three .callback { margin-top: auto; font-family: var(--display); font-size: 56px; font-weight: 700; letter-spacing: -0.035em; color: var(--white-80); }
+.s-three .callback span { color: var(--yellow); }
+
+/* ---------- Thank you (Kotlin gradient) ------------------------------- */
+
+.s-thanks { justify-content: space-between; }
+.s-thanks h2 { font-size: 200px; letter-spacing: -0.06em; line-height: .9; }
+.s-thanks .row { display: flex; gap: 64px; align-items: center; }
+.s-thanks .qr { width: 260px; height: 260px; background: #fff; border-radius: 22px; padding: 14px; box-sizing: border-box; }
+.s-thanks .links a { display: block; font-family: var(--display); font-size: 56px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.15; }
+.s-thanks .links .cap { color: var(--white); margin-top: 18px; }
+.s-thanks .who { font-size: 36px; font-weight: 600; display: flex; gap: 64px; }
+.s-thanks .art { right: 110px; top: 170px; width: 540px; height: 540px; }
+
+/* ---------- Slide transition ------------------------------------------ */
+
+/* "konf": backgrounds dissolve (reveal's background layer) while the content
+   drifts in from the right and settles — a short, Keynote-like move. */
+.reveal.konf .slides > section:not([data-transition]),
+.reveal.konf .slides > section[data-transition="konf"] {
+  transition: transform .7s var(--ease), opacity .45s ease, visibility .7s;
+}
+.reveal.konf .slides > section.future:not([data-transition]) { transform: translate3d(90px, 0, 0); }
+.reveal.konf .slides > section.past:not([data-transition]) { transform: translate3d(-90px, 0, 0); }
+.reveal .slides > section.present { transform: none; }
+
+/* Background wipe layers (created by deck.js between different surfaces).
+   They live in reveal's background layer, so slide content stays on top. */
+.reveal .backgrounds .bg-wipe { position: absolute; inset: 0; pointer-events: none; will-change: clip-path; }
+/* While a wipe runs: the outgoing slide clears fast, the incoming one waits
+   for the new surface to cover most of the screen before it settles in. */
+.reveal.wiping .slides > section.past,
+.reveal.wiping .slides > section.future { transition-duration: .22s !important; }
+.reveal.wiping .slides > section.present { transition-delay: .38s; }
+
+/* ---------- Overview / print / reduced motion / lite ------------------- */
+
+.reveal.overview .art .ln { stroke-dashoffset: 0; }
+.reveal.overview .dots, html.print-pdf .dots, html.lite .dots { animation: none !important; }
+.reveal.overview .enter, html.print-pdf .enter, html.lite .enter,
+.reveal.overview .err-line, html.print-pdf .err-line, html.lite .err-line { animation: none !important; }
+.reveal.overview .sticker.auto, html.print-pdf .sticker.auto, html.lite .sticker.auto { animation: none !important; }
+.reveal.overview .draw-auto .stroke, html.print-pdf .draw-auto .stroke, html.lite .draw-auto .stroke,
+.reveal.overview .graph .wire.stroke, html.print-pdf .graph .wire.stroke, html.lite .graph .wire.stroke { animation: none !important; stroke-dashoffset: 0; }
+.reveal.overview .strip.build .seg, html.print-pdf .strip.build .seg { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .dots, .enter, .sticker.auto, .err-line { animation: none !important; }
+  .draw-auto .stroke, .graph .wire.stroke { animation: none !important; stroke-dashoffset: 0 !important; }
+  /* keep the centring + tilt that the generic fragment reset would remove */
+  .reveal .sticker.fragment { transform: translate(-50%, -50%) rotate(var(--r, 0deg)) !important; }
+}
+.reveal.overview .art .tile { opacity: 1; }
+html.print-pdf .art .ln { stroke-dashoffset: 0 !important; animation: none !important; }
+html.print-pdf .art .tile { opacity: 1 !important; animation: none !important; }
+html.print-pdf .illus .ln { stroke-dashoffset: 0 !important; animation: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal .fragment { transition: opacity .2s linear !important; transform: none !important; animation: none !important; }
+  .art .ln, .ring .stroke, .graph .wire.stroke { animation: none !important; stroke-dashoffset: 0 !important; }
+  .art .tile, .field .shape { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .s-demo .rec i, .s-map .packet { animation: none !important; }
+  .illus .ln { animation: none !important; stroke-dashoffset: 0 !important; }
+  .illus circle.ln { fill-opacity: 1; }
+}
+html.lite .art .ln { animation: none !important; stroke-dashoffset: 0; }
+html.lite .art .tile { animation: none !important; opacity: 1; }
+html.lite .field .shape { animation: none !important; }
+
+/* Secondary text on the Kotlin surfaces sits a step brighter than on violet. */
+.kotlin .lead, .kotlin .cap, .kotlin .who small { color: rgba(255,255,255,.9); }
+
+/* ---------- Kotlin purple surfaces -------------------------------------
+   #7F52FF is lighter than the old violet, so secondary text steps up,
+   labels go dark ink, and teal accents hand over to white / yellow. */
+.kotlin { --white-80: rgba(255,255,255,.94); --white-60: rgba(255,255,255,.86); --white-40: rgba(255,255,255,.58); }
+.kotlin .label { color: #1f0b5e; }
+.kotlin.coral .label { color: #3b0a14; }
+.kotlin .s-cost .fname, .kotlin .fname { color: #1f0b5e; font-weight: 700; }
+.kotlin .nots .q-ic, .kotlin .nots .q code { color: #fff; }
+.kotlin .s-ios .policy .y, .s-ios.kotlin .policy .y { color: #fff; }
+.kotlin .capline code { color: #ffe08a; }
+
+/* code on purple: light tokens, magenta lift, yellow squiggle */
+.kotlin .code { color: #f4efff; }
+.kotlin .code .kw { color: #ffd0f0; }
+.kotlin .code .an { color: #ffe08a; }
+.kotlin .code .fn { color: #ffffff; font-weight: 700; }
+.kotlin .code .st { color: #c6ffe9; }
+.kotlin .code .nu { color: #ffe08a; }
+.kotlin .code .cm { color: rgba(255,255,255,.66); }
+.kotlin .code .on .kw { color: #ffe3f6; }
+.kotlin .code .err { text-decoration-color: #ffe08a; }
+
+/* ---------- Pen transition (deck.js) ----------------------------------
+   The outgoing slide stays on screen while it un-draws; the incoming one
+   waits, hidden, until it can draw itself in. */
+.reveal .slides > section.exiting { opacity: 1 !important; visibility: visible !important; transform: none !important; z-index: 30; pointer-events: none; }
+.reveal .slides > section.waiting { visibility: hidden !important; }
+
+/* ---------- Pen overlays (deck.js) -------------------------------------
+   Stroke copies of each component, traced in and out like the line-art. */
+.pen-layer { position: absolute; inset: 0; z-index: 60; pointer-events: none; overflow: visible; }
+.pen-ovl { position: absolute; overflow: visible; pointer-events: none; z-index: 60; }
+.pen-ovl text { paint-order: normal; }
+.pen-ovl.pen-sticker { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); z-index: 6; }
+.pen-ovl svg.ic { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+
+/* With the pen on, it alone draws components: retire the CSS entrances. */
+html.pen .reveal section .enter,
+html.pen .reveal section .sticker.auto,
+html.pen .reveal section .err-line { animation: none !important; }
+html.pen .reveal .strip.build .seg { opacity: 1; transform: none; transition: none; }
+html.pen .reveal .fragment.rise { transform: none; transition: opacity .2s linear; }
+html.pen .reveal .sticker.fragment.stick { transform: translate(-50%, -50%) rotate(var(--r, 0deg)) !important; transition: opacity .2s linear; }
+
+/* Art waits for the slide's content to finish drawing (deck.js adds
+   .art-wait while the pen traces the components, then removes it). */
+.reveal section.art-wait .dots { opacity: 0; }

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ketoy Slides</title>
+  <meta name="description" content="Talk decks from the KetoyVM team.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --k-purple: #7F52FF;
+      --k-magenta: #C711E1;
+      --k-coral: #E44857;
+      --white-80: rgba(255, 255, 255, .86);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(120deg, var(--k-purple) 0%, var(--k-purple) 34%, var(--k-magenta) 72%, var(--k-coral) 100%);
+      color: #fff;
+      font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex; flex-direction: column;
+      padding: clamp(32px, 7vw, 104px) clamp(16px, 8vw, 128px);
+    }
+    .brand { font-family: 'Inter Tight', 'Inter', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; opacity: .9; }
+    h1 { font-family: 'Inter Tight', 'Inter', sans-serif; font-weight: 800; font-size: clamp(48px, 10vw, 128px); line-height: .95; letter-spacing: -0.05em; margin: clamp(40px, 9vh, 96px) 0 clamp(32px, 6vh, 64px); }
+    ul { list-style: none; margin: 0; padding: 0; max-width: 880px; }
+    li + li { margin-top: 12px; }
+    a.talk {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap;
+      color: #fff; text-decoration: none;
+      padding: 24px 28px; border-radius: 22px;
+      border: 2px solid rgba(255, 255, 255, .55);
+      transition: background .2s ease, border-color .2s ease;
+    }
+    a.talk:hover, a.talk:focus-visible { background: rgba(255, 255, 255, .12); border-color: #fff; outline: none; }
+    .talk b { font-family: 'Inter Tight', 'Inter', sans-serif; font-size: clamp(22px, 3vw, 32px); letter-spacing: -0.025em; }
+    .talk span { font-size: 16px; color: var(--white-80); }
+    footer { margin-top: auto; padding-top: 48px; font-size: 14px; color: var(--white-80); }
+    footer a { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="brand">Ketoy</div>
+  <h1>Slides</h1>
+  <ul>
+    <li>
+      <a class="talk" href="/devfest-chennai-26/">
+        <b>Kotlin Over the Air</b>
+        <span>DevFest Chennai 2026</span>
+      </a>
+    </li>
+  </ul>
+  <footer><a href="https://github.com/KetoyDev/KetoyVM">github.com/KetoyDev/KetoyVM</a></footer>
+</body>
+</html>

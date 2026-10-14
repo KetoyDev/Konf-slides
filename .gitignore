@@ -1,0 +1,7 @@
+.DS_Store
+
+# Kept local only
+# - reference photos from KotlinConf (third-party, not ours to redistribute)
+# - the internal committee review of the deck
+**/ref-img/
+**/REVIEW.md
