@@ -216,7 +216,7 @@
     '.rec', '.flow', '.strip .seg', '.sig-note', '.numbers .n', '.steps .st-i', '.steps .rail', '.tamper',
     '.ring .core', '.sticker', '.facts .fact', '.capline', '.file', '.device .plat', '.phone', '.device .under', '.policy > *',
     '.gcap', '.ladder .r', '.plane', '.nots .row', '.s-three .it', '.callback',
-    '.s-thanks .qr', '.links', '.err-line', '.qr-card', '.url', '.s-follow .cap',
+    '.s-thanks .qr', '.links', '.err-line', '.qr-card', '.url', '.s-follow .cap', '.eq > *', '.big-year', '.months', '.grid-legend', '.loss-line', '.pane-h', '.ktx-row', '.map-note',
   ].join(',');
 
   const hiddenFragment = (el) => !!el.closest('.fragment:not(.visible):not(.light):not(.trigger):not(.wire)');
@@ -392,7 +392,7 @@
         { duration: 520, delay: Math.min(i * 3, 220), easing: easeIn, fill: 'forwards' })));
     if (!artPending) slide.querySelectorAll('.art .tile').forEach((el, i) => anims.push(el.animate([{ scale: '1', opacity: 1 }, { scale: '.4', opacity: 0 }],
       { duration: 380, delay: Math.min(i * 12, 220), easing: easeIn, fill: 'forwards' })));
-    slide.querySelectorAll('.field, .dots, .ring .halo, .ring .wall-label, .step-dots').forEach((el) => anims.push(el.animate([{ opacity: 1 }, { opacity: 0 }],
+    slide.querySelectorAll('.field, .dots, .ring .halo, .ring .wall-label, .step-dots, .year-grid').forEach((el) => anims.push(el.animate([{ opacity: 1 }, { opacity: 0 }],
       { duration: 520, easing: 'ease-in', fill: 'forwards' })));
     return anims;
   }

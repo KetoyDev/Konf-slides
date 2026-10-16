@@ -7,7 +7,7 @@
   <meta name="description" content="Kotlin Over the Air: ship a Compose screen to users in minutes, without a store release — DevFest Chennai 2026">
   <link rel="stylesheet" href="vendor/reveal.js/dist/reset.css">
   <link rel="stylesheet" href="vendor/reveal.js/dist/reveal.css">
-  <link rel="stylesheet" href="css/konf.css?v=20261015022844">
+  <link rel="stylesheet" href="css/konf.css?v=20261016235522">
 </head>
 <body>
 
@@ -44,15 +44,14 @@
         <p class="lead">Ship a Compose screen to users in minutes. No store release.</p>
       </div>
       <div class="who z">
-        <span>Aditya Shinde<small>KetoyVM</small></span>
-        <span>Co-speaker<small>Company</small></span>
+        <span>Aditya Shinde<small>Founder – Ketoy.dev</small></span>
       </div>
       <aside class="notes">
-        <p>⏱ 0:00 → 1:30 · <b>[A] Aditya</b></p>
+        <p>⏱ 0:00 → 1:30</p>
         <ul>
           <li>Hands up: who shipped a one-line fix, then waited a week?</li>
           <li>"That wait is what this talk is about."</li>
-          <li>One sentence each: who we are. KetoyVM, open source.</li>
+          <li>One sentence: who I am. Founder of Ketoy.dev; KetoyVM is open source.</li>
           <li>Promise: by the end you'll see a Kotlin edit reach a phone, live.</li>
         </ul>
         <p>→ "Let's start with that week."</p>
@@ -76,7 +75,7 @@
         </div>
       </div>
       <aside class="notes">
-        <p>⏱ 1:15 → 1:35 · <b>[A]</b> · no clicks, builds itself</p>
+        <p>⏱ 1:15 → 1:35 · no clicks, builds itself</p>
         <ul>
           <li>"Everything I show today is at this link, live. Scan it now."</li>
           <li>Stay quiet for five seconds. Phones go up; let them.</li>
@@ -109,7 +108,7 @@
       <p class="kq fragment rise" data-fragment-index="1">Kotlin and Compose<span>?</span></p>
 
       <aside class="notes">
-        <p>⏱ 1:30 → 3:30 · <b>[A]</b> · CLICK ×2</p>
+        <p>⏱ 1:30 → 3:30 · CLICK ×2</p>
         <ul>
           <li><b>▶1 timeline.</b> Play review is hours. The long pole is <i>users not updating</i>.</li>
           <li>Feature flags only toggle what already shipped.</li>
@@ -122,6 +121,34 @@
       </aside>
     </section>
 
+    <!-- 02b · DO THE MATH (what the wait costs a year) =================== -->
+    <section class="s s-math kotlin coral" data-background-color="#e44857">
+      <div class="label">Do the math</div>
+      <div class="eq">
+        <span class="num s-yellow" style="--r:-4deg">3</span><span class="t">updates<br>a month</span>
+        <span class="op">×</span>
+        <span class="num s-white" style="--r:3deg">2</span><span class="t">days of waiting<br>each</span>
+        <span class="op">=</span>
+        <span class="num s-ink" style="--r:-3deg">6</span><span class="t">days lost<br>a month</span>
+      </div>
+      <h2 class="big-year">72 days a year.</h2>
+      <div class="year">
+        <div class="months"><span style="left:0px">Jan</span><span style="left:145px">Feb</span><span style="left:261px">Mar</span><span style="left:377px">Apr</span><span style="left:493px">May</span><span style="left:638px">Jun</span><span style="left:754px">Jul</span><span style="left:870px">Aug</span><span style="left:1015px">Sep</span><span style="left:1131px">Oct</span><span style="left:1276px">Nov</span><span style="left:1392px">Dec</span></div>
+        <div class="year-grid" style="--cols:53"><i class="pad"></i><i class="pad"></i><i class="pad"></i><i class="pad"></i><i></i><i></i><i></i><i></i><i class="on" style="--k:0"></i><i class="on" style="--k:1"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:2"></i><i class="on" style="--k:3"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:4"></i><i class="on" style="--k:5"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:6"></i><i class="on" style="--k:7"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:8"></i><i class="on" style="--k:9"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:10"></i><i class="on" style="--k:11"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:12"></i><i class="on" style="--k:13"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:14"></i><i class="on" style="--k:15"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:16"></i><i class="on" style="--k:17"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:18"></i><i class="on" style="--k:19"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:20"></i><i class="on" style="--k:21"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:22"></i><i class="on" style="--k:23"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:24"></i><i class="on" style="--k:25"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:26"></i><i class="on" style="--k:27"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:28"></i><i class="on" style="--k:29"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:30"></i><i class="on" style="--k:31"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:32"></i><i class="on" style="--k:33"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:34"></i><i class="on" style="--k:35"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:36"></i><i class="on" style="--k:37"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:38"></i><i class="on" style="--k:39"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:40"></i><i class="on" style="--k:41"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:42"></i><i class="on" style="--k:43"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:44"></i><i class="on" style="--k:45"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:46"></i><i class="on" style="--k:47"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:48"></i><i class="on" style="--k:49"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:50"></i><i class="on" style="--k:51"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:52"></i><i class="on" style="--k:53"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:54"></i><i class="on" style="--k:55"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:56"></i><i class="on" style="--k:57"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:58"></i><i class="on" style="--k:59"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:60"></i><i class="on" style="--k:61"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:62"></i><i class="on" style="--k:63"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:64"></i><i class="on" style="--k:65"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:66"></i><i class="on" style="--k:67"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:68"></i><i class="on" style="--k:69"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on" style="--k:70"></i><i class="on" style="--k:71"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="grid-legend"><i class="on"></i> a fix that's ready, waiting for your users &nbsp;·&nbsp; about 1 day in 5</div>
+      </div>
+      <p class="loss-line">That's what your team is losing.</p>
+      <aside class="notes">
+        <p>⏱ ~45 s · no clicks, builds itself</p>
+        <ul>
+          <li>"Three updates a month. Two days of waiting each. Six days a month."</li>
+          <li>Let the calendar light up. Point at it: "Every white square, your fix exists and nobody has it."</li>
+          <li>★ "72 days a year. That's what your team is losing."</li>
+        </ul>
+        <p>→ "And some days can't wait at all."</p>
+      </aside>
+    </section>
+
     <!-- 03 · STATEMENT — Diwali ========================================== -->
     <section class="s st" data-background-color="#8f2cf0">
       <div class="field" data-field></div>
@@ -130,7 +157,7 @@
         <p class="lead">Not when the last user finally updates.</p>
       </div>
       <aside class="notes">
-        <p>⏱ 3:30 → 4:00 · <b>[A]</b></p>
+        <p>⏱ 3:30 → 4:00</p>
         <ul>
           <li>Let it sit. Two seconds of silence.</li>
           <li>A festival sale, a wrong price, a broken onboarding step.</li>
@@ -161,7 +188,7 @@
       <p class="capdef cap fragment rise" data-fragment-index="2">Both run only what the app chose to expose. We call those <b>capabilities</b>.</p>
 
       <aside class="notes">
-        <p>⏱ 4:00 → 6:30 · <b>[A]</b> · CLICK ×2</p>
+        <p>⏱ 4:00 → 6:30 · CLICK ×2</p>
         <ul>
           <li><b>▶1</b> Both lanes light up. Walk them left to right: JSON ↔ a real <code>.kt</code> file,</li>
           <li>an interpreter ↔ a signed bytecode file,</li>
@@ -170,7 +197,69 @@
           <li>Define <b>capability</b>. You'll hear it all talk.</li>
         </ul>
         <p>→ "If you remember one sentence from today, make it this one."</p>
-        <p><i>Store-policy question? "Hold it, slide 19 answers it."</i></p>
+        <p><i>Store-policy question? "Hold it, slide 23 answers it."</i></p>
+      </aside>
+    </section>
+
+    <!-- 04b · SDUI, END TO END (JSON ↔ interpreter) ===================== -->
+    <section class="s s-map2" data-background-color="#36333d">
+      <div class="label">Server-driven UI, end to end</div>
+      <h2>The server sends JSON. The app ships the interpreter.</h2>
+      <div class="map2">
+        <div class="pane"><div class="pane-h"><span class="tag-file">promo.json</span> sent by the server</div>
+          <div class="code mapcode"><span class="l ">{</span><span class="l i1"><span class="mk y"><span class="k">"type"</span>: <span class="st">"column"</span></span>,</span><span class="l i1"><span class="mk t"><span class="k">"padding"</span>: <span class="nu">16</span></span>,</span><span class="l i1"><span class="mk p"><span class="k">"children"</span>: [</span></span><span class="l i2">{ <span class="mk w"><span class="k">"type"</span>: <span class="st">"text"</span>, <span class="k">"text"</span>: <span class="st">"Diwali Sale"</span></span> },</span><span class="l i2">{ <span class="mk w"><span class="k">"type"</span>: <span class="st">"text"</span>, <span class="k">"text"</span>: <span class="st">"Flat 40% off"</span></span> },</span><span class="l i2">{ <span class="mk o"><span class="k">"type"</span>: <span class="st">"button"</span></span>, <span class="k">"text"</span>: <span class="st">"Shop now"</span>,</span><span class="l i3"><span class="mk o"><span class="k">"action"</span>: <span class="st">"navigate:/offers"</span></span> }</span><span class="l i1"><span class="mk p">]</span></span><span class="l ">}</span></div></div>
+        <div class="pane"><div class="pane-h"><span class="tag-file">Render.kt</span> compiled into the app</div>
+          <div class="code mapcode"><span class="l "><span class="an">@Composable</span></span><span class="l "><span class="kw">fun</span> <span class="fn">Render</span>(n: Node) {</span><span class="l i1"><span class="kw">when</span> (n[<span class="st">"type"</span>]) {</span><span class="l i2"><span class="mk y"><span class="st">"column"</span> -&gt; <span class="fn">Column</span>(</span></span><span class="l i3"><span class="mk t">Modifier.<span class="fn">padding</span>(n.<span class="fn">dp</span>(<span class="st">"padding"</span>))</span></span><span class="l i2">) { <span class="mk p">n.children.<span class="fn">forEach</span> { <span class="fn">Render</span>(it) }</span> }</span><span class="l i2"><span class="mk w"><span class="st">"text"</span>   -&gt; <span class="fn">Text</span>(n[<span class="st">"text"</span>])</span></span><span class="l i2"><span class="mk o"><span class="st">"button"</span> -&gt; <span class="fn">Button</span>(onClick = {</span></span><span class="l i3"><span class="mk o"><span class="fn">perform</span>(n[<span class="st">"action"</span>])</span></span><span class="l i2"><span class="mk o">})</span> { <span class="fn">Text</span>(n[<span class="st">"text"</span>]) }</span><span class="l i2"><span class="kw">else</span> -&gt; {} <span class="cm">// unknown type: nothing shows</span></span><span class="l i1">}</span><span class="l ">}</span></div></div>
+      </div>
+      <p class="map-note">Every <span class="hl">"type"</span> the app doesn't know renders nothing. A new component, or any logic, means a new app release.</p>
+      <aside class="notes">
+        <p>⏱ ~60 s · no clicks, builds itself</p>
+        <ul>
+          <li>Left: what the server sends. Right: what the app must already contain.</li>
+          <li>Follow one colour: "column" on the left, the <code>Column</code> branch on the right.</li>
+          <li>★ "The JSON can only say what the interpreter already knows. Logic, state, a new widget: that's a release."</li>
+        </ul>
+        <p>→ "Now the same card, the Ketoy way."</p>
+      </aside>
+    </section>
+
+    <!-- 04c · OTA, END TO END (1/2): Kotlin → instructions ============== -->
+    <section class="s s-map2 kotlin" data-background-color="#7f52ff" data-auto-animate>
+      <div class="label" data-id="ota-l">Kotlin over the air, end to end</div>
+      <h2 data-id="ota-h">The same card, as plain Kotlin.</h2>
+      <div class="map2">
+        <div class="pane"><div class="pane-h"><span class="tag-file">DiwaliPromo.kt</span> what you write</div>
+          <div class="code mapcode"><span class="l "><span class="an">@KetoyComposable</span></span><span class="l "><span class="kw">fun</span> <span class="fn">DiwaliPromo</span>() {</span><span class="l i1"><span class="mk y"><span class="fn">Column</span>(Modifier.<span class="fn">padding</span>(<span class="nu">16</span>.dp)) {</span></span><span class="l i2"><span class="mk w"><span class="fn">Text</span>(<span class="st">"Diwali Sale"</span>)</span></span><span class="l i2"><span class="mk w"><span class="fn">Text</span>(<span class="st">"Flat 40% off"</span>)</span></span><span class="l i2"><span class="mk o"><span class="fn">Button</span>(onClick = {</span> <span class="mk t"><span class="fn">navPush</span>(<span class="st">"/offers"</span>)</span> <span class="mk o">}) {</span></span><span class="l i3"><span class="mk p"><span class="fn">Text</span>(<span class="st">"Shop now"</span>)</span></span><span class="l i2">}</span><span class="l i1">}</span><span class="l ">}</span></div></div>
+        <div class="pane kbc" data-id="kbc"><div class="pane-h"><span class="tag-file">KBC</span> what the compiler emits</div><div class="code mapcode"><span class="l fnh"><span class="cm">fn0</span>  DiwaliPromo</span><span class="l i1"><span class="mk y"><span class="op">COMPOSABLE_CALL</span> Column modifier=#0 content=fn1</span></span><span class="l i1"><span class="op">RETURN</span></span><span class="l fnh"><span class="cm">fn1</span>  Column { … }</span><span class="l i1"><span class="mk w"><span class="op">COMPOSABLE_CALL</span> Text text=<span class="st">"Diwali Sale"</span></span></span><span class="l i1"><span class="mk w"><span class="op">COMPOSABLE_CALL</span> Text text=<span class="st">"Flat 40% off"</span></span></span><span class="l i1"><span class="mk o"><span class="op">COMPOSABLE_CALL</span> Button onClick=fn2 content=fn3</span></span><span class="l i1"><span class="op">RETURN</span></span><span class="l fnh"><span class="cm">fn2</span>  onClick</span><span class="l i1"><span class="mk t"><span class="op">LOAD_STRING</span> r0 <span class="st">"/offers"</span></span></span><span class="l i1"><span class="mk t"><span class="op">INVOKE_CAPABILITY</span> r1 NAV_PUSH [r0]</span></span><span class="l i1"><span class="op">RETURN</span></span><span class="l fnh"><span class="cm">fn3</span>  Button { … }</span><span class="l i1"><span class="mk p"><span class="op">COMPOSABLE_CALL</span> Text text=<span class="st">"Shop now"</span></span></span><span class="l i1"><span class="op">RETURN</span></span></div></div>
+      </div>
+      <aside class="notes">
+        <p>⏱ ~50 s · no clicks, builds itself</p>
+        <ul>
+          <li>Left: ordinary Compose. Right: the compiler's output, a few instructions per line.</li>
+          <li>Each lambda becomes its own small function: the Column body, the onClick, the Button label.</li>
+          <li><code>navPush</code> is a capability, so it becomes <code>INVOKE_CAPABILITY NAV_PUSH</code>.</li>
+        </ul>
+        <p>→ "And those instructions become a file."</p>
+      </aside>
+    </section>
+
+    <!-- 04d · OTA, END TO END (2/2): instructions → .ktx ================== -->
+    <section class="s s-map2 kotlin" data-background-color="#7f52ff" data-auto-animate>
+      <div class="label" data-id="ota-l">Kotlin over the air, end to end</div>
+      <h2 data-id="ota-h">…compiled into one signed file.</h2>
+      <div class="map2">
+        <div class="pane kbc" data-id="kbc"><div class="pane-h"><span class="tag-file">KBC</span> what the compiler emits</div><div class="code mapcode"><span class="l fnh"><span class="cm">fn0</span>  DiwaliPromo</span><span class="l i1"><span class="mk y"><span class="op">COMPOSABLE_CALL</span> Column modifier=#0 content=fn1</span></span><span class="l i1"><span class="op">RETURN</span></span><span class="l fnh"><span class="cm">fn1</span>  Column { … }</span><span class="l i1"><span class="mk w"><span class="op">COMPOSABLE_CALL</span> Text text=<span class="st">"Diwali Sale"</span></span></span><span class="l i1"><span class="mk w"><span class="op">COMPOSABLE_CALL</span> Text text=<span class="st">"Flat 40% off"</span></span></span><span class="l i1"><span class="mk o"><span class="op">COMPOSABLE_CALL</span> Button onClick=fn2 content=fn3</span></span><span class="l i1"><span class="op">RETURN</span></span><span class="l fnh"><span class="cm">fn2</span>  onClick</span><span class="l i1"><span class="mk t"><span class="op">LOAD_STRING</span> r0 <span class="st">"/offers"</span></span></span><span class="l i1"><span class="mk t"><span class="op">INVOKE_CAPABILITY</span> r1 NAV_PUSH [r0]</span></span><span class="l i1"><span class="op">RETURN</span></span><span class="l fnh"><span class="cm">fn3</span>  Button { … }</span><span class="l i1"><span class="mk p"><span class="op">COMPOSABLE_CALL</span> Text text=<span class="st">"Shop now"</span></span></span><span class="l i1"><span class="op">RETURN</span></span></div></div>
+        <div class="pane ktx"><div class="pane-h"><span class="tag-file">main.ktx</span> what you ship</div><div class="ktx-row "><span class="sec">HEADER</span><span class="hex">4B 54 4F 59 …</span><span class="mean">"KTOY" · version · flags</span></div><div class="ktx-row w"><span class="sec">STRINGS <span class="sid">0x01</span></span><span class="hex">00 0B 44 69 77 61 6C 69 20 53 61 6C 65</span><span class="mean">"Diwali Sale" · u16 length + UTF-8</span></div><div class="ktx-row p"><span class="sec">CODE <span class="sid">0x07</span></span><span class="hex">B0 00 01 01 00 05 00 06</span><span class="mean">COMPOSABLE_CALL Text "Shop now"</span></div><div class="ktx-row t"><span class="sec"></span><span class="hex">08 00 00 04  50 01 07 00 01 00</span><span class="mean">LOAD_STRING "/offers" · NAV_PUSH</span></div><div class="ktx-row "><span class="sec"></span><span class="hex">78 9C …</span><span class="mean">zlib-compressed on disk</span></div><div class="ktx-row g"><span class="sec">SIGNATURE</span><span class="hex">64 bytes</span><span class="mean">Ed25519, checked before anything is read</span></div></div>
+      </div>
+      <aside class="notes">
+        <p>⏱ ~50 s · no clicks, builds itself</p>
+        <ul>
+          <li>The instructions slide left; the file appears. Same colours, same lines.</li>
+          <li><code>B0</code> is COMPOSABLE_CALL, <code>00 01</code> is the Text adapter, <code>05</code> means "a string from the pool".</li>
+          <li>★ "Strings once in a pool, code compressed, and a signature checked before a single byte is read."</li>
+        </ul>
+        <p><i>Byte formats are the real wire format; the pool indices (06, 04) are illustrative.</i></p>
+        <p>→ "That's the whole idea in one sentence."</p>
       </aside>
     </section>
 
@@ -181,9 +270,9 @@
         <h2 class="mantra">The app is the operating system.<br><span>The server ships programs.</span></h2>
       </div>
       <aside class="notes">
-        <p>⏱ 6:30 → 7:00 · <b>[A] → hand over to [B]</b></p>
+        <p>⏱ 6:30 → 7:00</p>
         <ul><li>Say it once. Slowly. Don't explain it.</li></ul>
-        <p>→ HANDOVER: "[B] will show you how a program gets from a <code>.kt</code> file to a phone."</p>
+        <p>→ "Let me show you how a program gets from a <code>.kt</code> file to a phone."</p>
       </aside>
     </section>
 
@@ -201,7 +290,7 @@
       </div>
       <p class="define cap enter" style="--i:3"><b>KBC</b> = Ketoy bytecode, our own small instruction set.</p>
       <aside class="notes">
-        <p>⏱ 7:00 → 8:00 · <b>[B]</b> · CLICK ×1</p>
+        <p>⏱ 7:00 → 8:00 · CLICK ×1</p>
         <ul>
           <li>One sentence per step. We go deep on 2, 3 and 4 next.</li>
           <li><b>▶1</b> Watch one screen travel the whole way.</li>
@@ -222,7 +311,7 @@
       </div>
       <div class="step-dots" data-id="dots"><i class="on"></i><i></i><i></i><i></i></div>
       <aside class="notes">
-        <p>⏱ 8:00 → 8:50 · <b>[B]</b></p>
+        <p>⏱ 8:00 → 8:50</p>
         <ul>
           <li>Ordinary Compose. Only the annotation is new.</li>
           <li>The compiler follows every call from this root.</li>
@@ -242,7 +331,7 @@
       </div>
       <div class="step-dots" data-id="dots"><i></i><i class="on"></i><i></i><i></i></div>
       <aside class="notes">
-        <p>⏱ 8:50 → 9:40 · <b>[B]</b></p>
+        <p>⏱ 8:50 → 9:40</p>
         <ul>
           <li><code>observeTodos()</code> is a capability: the host app provides it.</li>
           <li>The Flow, the state, recomposition: all real.</li>
@@ -262,7 +351,7 @@
       </div>
       <div class="step-dots" data-id="dots"><i></i><i></i><i class="on"></i><i></i></div>
       <aside class="notes">
-        <p>⏱ 9:40 → 10:30 · <b>[B]</b></p>
+        <p>⏱ 9:40 → 10:30</p>
         <ul>
           <li>Each call goes to a generated <b>adapter</b>: a thin bridge to the real composable.</li>
           <li>Story: Material3 1.4 added <code>autoSize</code> to <code>Text</code>. Old bundles kept working.</li>
@@ -283,7 +372,7 @@
       </div>
       <div class="step-dots" data-id="dots"><i></i><i></i><i></i><i class="on"></i></div>
       <aside class="notes">
-        <p>⏱ 10:30 → 11:30 · <b>[B]</b> · no clicks, builds itself</p>
+        <p>⏱ 10:30 → 11:30 · no clicks, builds itself</p>
         <ul>
           <li>Red squiggle: calling <code>Toast</code> directly.</li>
           <li>The error line drops in by itself: the build fails, naming the call and the fix.</li>
@@ -304,7 +393,7 @@
         <p class="lead">The KBC compiler ships its own Kotlin (2.4.10). Your app's Kotlin and AGP versions don't matter.</p>
       </div>
       <aside class="notes">
-        <p>⏱ 11:30 → 12:00 · <b>[B]</b></p>
+        <p>⏱ 11:30 → 12:00</p>
         <ul>
           <li>The compiler runs isolated, with its own classpath.</li>
           <li>Verified on a consumer app using a different Kotlin and AGP 9.</li>
@@ -331,14 +420,14 @@
       </div>
       <p class="cmd enter" style="--i:2"><code>./gradlew :app:ketoyBundle</code> &nbsp;→&nbsp; <code>assets/ketoy/main.ktx</code></p>
       <aside class="notes">
-        <p>⏱ 12:00 → 13:00 · <b>[B]</b> · no clicks, builds itself</p>
+        <p>⏱ 12:00 → 13:00 · no clicks, builds itself</p>
         <ul>
           <li>Gradle: one plugin, the core bundle, one line of config.</li>
           <li>The screen is plain Compose. The host keeps a native fallback.</li>
           <li>One task makes the signed file.</li>
           <li>Additive: nothing in your app is rewritten.</li>
         </ul>
-        <p>→ HANDOVER: "Enough slides. [A], show them."</p>
+        <p>→ "Enough slides. Let me show you."</p>
         <p><i>Check the snippet against the published version's catalog aliases before stage.</i></p>
       </aside>
     </section>
@@ -364,7 +453,7 @@
       </svg>
       <video class="demo-video" src="media/demo.mp4" muted playsinline preload="auto"></video>
       <aside class="notes">
-        <p>⏱ 13:00 → 17:30 · <b>[A] drives · [B] narrates</b></p>
+        <p>⏱ 13:00 → 17:30 · live demo</p>
         <ul>
           <li>Phone on scrcpy / doc cam, on the KBC Todo screen.</li>
           <li>Change one visible thing: header text and a colour.</li>
@@ -397,7 +486,7 @@
         <div class="n hero"><div class="v">0</div><p class="cap">bytes parsed before the signature verifies</p></div>
       </div>
       <aside class="notes">
-        <p>⏱ 17:30 → 18:30 · <b>[A]</b> · CLICK ×1</p>
+        <p>⏱ 17:30 → 18:30 · CLICK ×1</p>
         <ul>
           <li>Five parts build in. Manifests say which capabilities it needs.</li>
           <li><b>▶1</b> The signature lights up; the numbers appear.</li>
@@ -423,7 +512,7 @@
       </div>
       <div class="tamper fragment rise shake" data-fragment-index="1"><span class="bar"></span><p><span>One byte changed?</span> It stops at step 1 and shows your native screen.</p></div>
       <aside class="notes">
-        <p>⏱ 18:30 → 19:30 · <b>[A]</b> · CLICK ×1</p>
+        <p>⏱ 18:30 → 19:30 · CLICK ×1</p>
         <ul>
           <li>The four steps rise in. Pause on 3: a missing capability is rejected by name, at load.</li>
           <li><b>▶1</b> Tamper line: callback to the demo.</li>
@@ -441,13 +530,13 @@
         <p class="lead">Brotli decoding needed a JVM library, so our "portable" format was Android-only. Now it's DEFLATE: zlib exists everywhere.</p>
       </div>
       <aside class="notes">
-        <p>⏱ 19:30 → 20:15 · <b>[A]</b></p>
+        <p>⏱ 19:30 → 20:15</p>
         <ul>
           <li>Tell it as a story: the default hid the assumption.</li>
           <li>The fix is what let the same file run on iOS.</li>
           <li>★ "Assumptions hide in defaults."</li>
         </ul>
-        <p>→ HANDOVER: "[B], what does the VM actually let a bundle do?"</p>
+        <p>→ "So what does the VM actually let a bundle do?"</p>
       </aside>
     </section>
 
@@ -483,7 +572,7 @@
       </div>
       <p class="capline cap enter" style="--i:4">Host registers <code>observeTodos</code>. Bundle declares it needs <code>observeTodos</code>. Missing? <b>Rejected at load, by name.</b></p>
       <aside class="notes">
-        <p>⏱ 20:15 → 22:00 · <b>[B]</b> · CLICK ×1</p>
+        <p>⏱ 20:15 → 22:00 · CLICK ×1</p>
         <ul>
           <li>Stickers stick on by themselves. Inside the wall: only what the host registered on purpose.</li>
           <li><b>▶1</b> Outside: reflection, raw Android, DEX. ★ "Not discouraged. Unreachable."</li>
@@ -552,7 +641,7 @@
       </div>
 
       <aside class="notes">
-        <p>⏱ 22:00 → 24:30 · <b>[B]</b> · no clicks, builds itself</p>
+        <p>⏱ 22:00 → 24:30 · no clicks, builds itself</p>
         <ul>
           <li>Same bytes, same key as the Android app. No second compiler.</li>
           <li>Android: Compose, the thing on Play.</li>
@@ -561,7 +650,7 @@
           <li>Play: interpreted code in a VM is the allowed lane.</li>
           <li>App Store: say "pending" out loud. Canvas isn't on SwiftUI yet.</li>
         </ul>
-        <p>→ HANDOVER: "Real apps aren't one screen. [A]?"</p>
+        <p>→ "Real apps aren't one screen."</p>
         <p><i>Drop real screenshots at media/android.png, media/ios-swiftui.png, media/ios-cmp.png (portrait 3:5). They replace the drawn phones automatically.</i></p>
       </aside>
     </section>
@@ -602,7 +691,7 @@
       </div>
       <p class="plane enter" style="--i:6">No control plane. <span>Your CDN, your remote config, your rules.</span></p>
       <aside class="notes">
-        <p>⏱ 24:30 → 26:30 · <b>[A]</b> · no clicks, builds itself</p>
+        <p>⏱ 24:30 → 26:30 · no clicks, builds itself</p>
         <ul>
           <li>Feature teams ship their own bundle; <code>main</code> imports them by name.</li>
           <li>★ "It's <code>expect</code>/<code>actual</code>, at the bundle boundary." One signed manifest, never half a graph.</li>
@@ -626,12 +715,12 @@
         <div class="row enter" style="--i:2"><div class="q"><svg class="ic q-ic" aria-hidden="true"><use href="#i-brush"/></svg><span><code>Canvas</code> on the SwiftUI backend?</span></div><div class="a">Not yet. It fails by name, not silently.</div></div>
       </div>
       <aside class="notes">
-        <p>⏱ 26:30 → 27:30 · <b>[A]</b> · no clicks, builds itself</p>
+        <p>⏱ 26:30 → 27:30 · no clicks, builds itself</p>
         <ul>
           <li>This slide is what separates a talk from a pitch.</li>
           <li>One line each. Don't apologise.</li>
         </ul>
-        <p>→ HANDOVER: "[B], bring it home."</p>
+        <p>→ "Let me bring it home."</p>
       </aside>
     </section>
 
@@ -647,7 +736,7 @@
       </div>
       <p class="callback fragment rise">Your fix is ready today. Your users get it <span>today.</span></p>
       <aside class="notes">
-        <p>⏱ 27:30 → 28:30 · <b>[B]</b> · CLICK ×1</p>
+        <p>⏱ 27:30 → 28:30 · CLICK ×1</p>
         <ul>
           <li>Ten seconds per line. Don't re-explain.</li>
           <li><b>▶1</b> ★ Callback to slide 3: "…your users get it <i>today</i>."</li>
@@ -668,9 +757,9 @@
           <p class="cap">Quick start in 15 minutes.</p>
         </div>
       </div>
-      <div class="who z"><span>Aditya Shinde</span><span>Co-speaker</span><span>#DevFestChennai</span></div>
+      <div class="who z"><span>Let's connect<small><a href="https://www.linkedin.com/in/adityashinde1095">linkedin.com/in/adityashinde1095</a></small></span><span>Aditya Shinde<small>Founder – Ketoy.dev</small></span><span>#DevFestChennai</span></div>
       <aside class="notes">
-        <p>⏱ 28:30 → 30:00 · <b>[A + B]</b></p>
+        <p>⏱ 28:30 → 30:00</p>
         <ul>
           <li>Leave this up for all of Q&amp;A.</li>
           <li>Point at the QR. Say where to find you.</li>
@@ -685,7 +774,7 @@
 
 <script src="vendor/reveal.js/dist/reveal.js"></script>
 <script src="vendor/reveal.js/plugin/notes/notes.js"></script>
-<script src="js/art.js?v=20261015022844"></script>
-<script src="js/deck.js?v=20261015022844"></script>
+<script src="js/art.js?v=20261016235522"></script>
+<script src="js/deck.js?v=20261016235522"></script>
 </body>
 </html>

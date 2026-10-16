@@ -7,7 +7,7 @@ The stage notes in `index.html` are short cue lists. This file keeps the full pr
 
 **Open (30s).** "Hi Chennai. Quick show of hands — who has shipped a one-line fix and then waited a week for users to actually get it?" Let the hands go up. "That wait is what this talk is about."
 
-**Who we are.** Introduce both speakers in one sentence each. Mention we build KetoyVM, an open-source Kotlin execution runtime, and that it has been live on Google Play since mid-2026.
+**Who I am.** One sentence: Aditya Shinde, founder of Ketoy.dev. Mention we build KetoyVM, an open-source Kotlin execution runtime, and that it has been live on Google Play since mid-2026.
 
 **Promise for the next 30 minutes.** You will leave knowing (1) what "over the air" means for Kotlin, (2) how it is different from server-driven UI, (3) how the compiler → bundle → runtime pipeline actually works, and (4) how it runs on iOS and at multi-bundle scale.
 

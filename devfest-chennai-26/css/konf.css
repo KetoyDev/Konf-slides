@@ -549,6 +549,10 @@ html, body, .reveal-viewport { background: var(--violet); }
 .s-thanks .links a { display: block; font-family: var(--display); font-size: 56px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.15; }
 .s-thanks .links .cap { color: var(--white); margin-top: 18px; }
 .s-thanks .who { font-size: 36px; font-weight: 600; display: flex; gap: 64px; }
+.s-thanks .who { align-items: flex-end; }
+.s-thanks .who span small { display: block; font-size: 30px; font-weight: 500; color: var(--white-80); margin-top: 6px; }
+.s-thanks .who span:first-child small { font-family: var(--display); font-size: 44px; font-weight: 700; letter-spacing: -0.03em; color: #fff; }
+.s-thanks .who a { color: inherit; text-decoration: none; }
 .s-thanks .art { right: 110px; top: 170px; width: 540px; height: 540px; }
 
 /* ---------- Slide transition ------------------------------------------ */
@@ -668,3 +672,70 @@ html.pen .reveal .sticker.fragment.stick { transform: translate(-50%, -50%) rota
 .s-follow .qr-card img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
 .s-follow .sticker { font-size: 36px; padding: 14px 30px; }
 .fade-qr { -webkit-mask-image: radial-gradient(circle at 74% 50%, #000 26%, transparent 60%); mask-image: radial-gradient(circle at 74% 50%, #000 26%, transparent 60%); }
+
+/* ---------- Do the math (coral) ---------------------------------------- */
+.s-math .eq { margin-top: 30px; display: flex; align-items: center; gap: 22px; flex-wrap: nowrap; }
+.s-math .num { display: inline-flex; align-items: center; justify-content: center; min-width: 120px; height: 120px; padding: 0 30px; border-radius: 999px;
+  font-family: var(--display); font-size: 84px; font-weight: 800; letter-spacing: -0.04em; transform: rotate(var(--r, 0deg)); box-sizing: border-box; }
+.s-math .num.s-yellow { background: var(--yellow); color: #2a1a00; }
+.s-math .num.s-white { background: #fff; color: var(--k-coral); }
+.s-math .num.s-ink { background: var(--ink); color: #fff; }
+.s-math .t { font-size: 36px; font-weight: 600; line-height: 1.12; margin-right: 18px; }
+.s-math .op { font-family: var(--display); font-size: 72px; font-weight: 700; color: rgba(255,255,255,.75); margin: 0 6px; }
+.s-math .big-year { margin-top: 44px; font-size: 132px; letter-spacing: -0.05em; }
+.s-math .year { margin-top: 26px; position: relative; }
+.s-math .months { position: relative; height: 40px; }
+.s-math .months span { position: absolute; top: 0; font-size: 28px; font-weight: 600; color: rgba(255,255,255,.85); }
+.year-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 24px); grid-auto-columns: 24px; gap: 5px; }
+.year-grid i { display: block; border-radius: 5px; background: rgba(29, 20, 66, .24); }
+.year-grid i.pad { background: transparent; }
+.year-grid i.on, .grid-legend i.on { background: #fff; }
+.grid-legend { margin-top: 18px; font-size: 30px; color: rgba(255,255,255,.92); display: flex; align-items: center; gap: 12px; }
+.grid-legend i { width: 24px; height: 24px; border-radius: 5px; display: inline-block; }
+.s-math .loss-line { margin-top: auto; font-family: var(--display); font-size: 56px; font-weight: 800; letter-spacing: -0.035em; }
+
+/* the calendar arrives with the content, then the waiting days light up
+   in date order once the content has drawn (same beat as the line-art) */
+.reveal section.present:not(.waiting) .year-grid { animation: gridIn .6s var(--ease) .25s both; }
+@keyframes gridIn { from { opacity: 0; } to { opacity: 1; } }
+.reveal section.art-wait .year-grid i.on { background: rgba(29, 20, 66, .24); }
+.reveal section.present:not(.waiting):not(.art-wait) .year-grid i.on { animation: lightUp .32s var(--ease) calc(var(--k) * 24ms) both; }
+@keyframes lightUp { from { background: rgba(29, 20, 66, .24); transform: scale(.55); } 60% { transform: scale(1.18); } to { background: #fff; transform: none; } }
+html.lite .year-grid, html.lite .year-grid i.on, html.print-pdf .year-grid, html.print-pdf .year-grid i.on,
+.reveal.overview .year-grid, .reveal.overview .year-grid i.on { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .year-grid, .year-grid i.on { animation: none !important; } }
+
+/* ---------- End-to-end mapping slides (SDUI JSON, Kotlin → KBC → .ktx) ---- */
+.s-map2 h2 { font-size: 72px; }
+.s-map2 .label { margin-bottom: 14px; }
+.map2 { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.pane-h { font-size: 28px; color: var(--white-80); margin-bottom: 14px; display: flex; gap: 14px; align-items: baseline; }
+.tag-file { font-family: var(--mono); font-size: 28px; font-weight: 700; color: #fff; padding: 4px 14px; border-radius: 10px; background: rgba(255,255,255,.14); }
+.code.mapcode { font-size: 28px; line-height: 40px; }
+.code.mapcode .l { padding: 0 10px; margin-left: -10px; border-radius: 10px; }
+.code.mapcode .l.i1 { margin-left: calc(-10px + 2ch); }
+.code.mapcode .l.i2 { margin-left: calc(-10px + 4ch); }
+.code.mapcode .l.i3 { margin-left: calc(-10px + 6ch); }
+.code.mapcode .l.fnh { margin-top: 6px; color: rgba(255,255,255,.62); }
+.code.mapcode .l.fnh:first-child { margin-top: 0; }
+.code .k { color: #9fd8ff; }
+.code .op { color: #fff; font-weight: 700; }
+/* the mapping: one tint per idea, the same on both sides */
+.code .mk { border-radius: 6px; padding: 1px 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.code .mk.y { background: rgba(255,198,26,.24); box-shadow: inset 0 -3px 0 #ffc61a; }
+.code .mk.t { background: rgba(69,230,196,.20); box-shadow: inset 0 -3px 0 #45e6c4; }
+.code .mk.p { background: rgba(255,61,139,.24); box-shadow: inset 0 -3px 0 #ff3d8b; }
+.code .mk.w { background: rgba(255,255,255,.16); box-shadow: inset 0 -3px 0 #ffffff; }
+.code .mk.o { background: rgba(255,122,26,.24); box-shadow: inset 0 -3px 0 #ff7a1a; }
+.map-note { margin-top: auto; font-size: 36px; font-weight: 600; }
+.map-note .hl { font-family: var(--mono); color: #ffc61a; }
+/* the .ktx pane */
+.ktx-row { display: grid; grid-template-columns: 170px 1fr; column-gap: 18px; padding: 14px 18px; border-radius: 14px; margin-bottom: 10px; background: rgba(29,20,66,.30); }
+.ktx-row .sec { grid-row: span 2; font-family: var(--display); font-size: 28px; font-weight: 800; letter-spacing: -0.01em; align-self: center; }
+.ktx-row .sec .sid { display: block; font-family: var(--mono); font-size: 28px; font-weight: 500; color: rgba(255,255,255,.7); }
+.ktx-row .hex { font-family: var(--mono); font-size: 25px; font-weight: 700; white-space: nowrap; }
+.ktx-row .mean { font-size: 28px; color: rgba(255,255,255,.88); }
+.ktx-row.w .hex { box-shadow: inset 0 -3px 0 #fff; justify-self: start; }
+.ktx-row.p .hex { box-shadow: inset 0 -3px 0 #ff3d8b; justify-self: start; }
+.ktx-row.t .hex { box-shadow: inset 0 -3px 0 #45e6c4; justify-self: start; }
+.ktx-row.g { background: rgba(69,230,196,.20); }
