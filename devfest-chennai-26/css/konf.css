@@ -546,12 +546,11 @@ html, body, .reveal-viewport { background: var(--violet); }
 .s-thanks h2 { font-size: 200px; letter-spacing: -0.06em; line-height: .9; }
 .s-thanks .row { display: flex; gap: 64px; align-items: center; }
 .s-thanks .qr { width: 260px; height: 260px; background: #fff; border-radius: 22px; padding: 14px; box-sizing: border-box; }
-.s-thanks .links a { display: block; font-family: var(--display); font-size: 56px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.15; }
-.s-thanks .links .cap { color: var(--white); margin-top: 18px; }
+.s-thanks .links a { display: block; font-family: var(--display); font-size: 50px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.15; }
+.s-thanks .links .cap { color: var(--white); margin: 0 0 10px; font-size: 36px; font-weight: 600; }
 .s-thanks .who { font-size: 36px; font-weight: 600; display: flex; gap: 64px; }
 .s-thanks .who { align-items: flex-end; }
 .s-thanks .who span small { display: block; font-size: 30px; font-weight: 500; color: var(--white-80); margin-top: 6px; }
-.s-thanks .who span:first-child small { font-family: var(--display); font-size: 44px; font-weight: 700; letter-spacing: -0.03em; color: #fff; }
 .s-thanks .who a { color: inherit; text-decoration: none; }
 .s-thanks .art { right: 110px; top: 170px; width: 540px; height: 540px; }
 

@@ -55,7 +55,7 @@ motion-sensitive viewer). `?print-pdf` prints a handout.
 - `css/konf.css` — the theme.
 - `js/art.js` — seeded generator for the line-art, gradient tiles and gradient fields.
 - `js/deck.js` — reveal config, the custom `konf` slide transition, timeline and count-up beats.
-- `media/` — `qr-repo.svg` (real QR to the repo). Drop in `android.png`,
+- `media/` — `qr-linkedin.svg` and `qr-slides.svg` (real QR codes). Drop in `android.png`,
   `ios-swiftui.png`, `ios-cmp.png` (portrait 16:25) to replace the drawn phones,
   and `demo.mp4` as the live-demo fallback.
 
