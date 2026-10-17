@@ -213,10 +213,10 @@
     'h1', 'h2', '.label', '.lead', '.event', '.who > *', '.kq', '.who-ships > *',
     '.timeline .step', '.timeline .rail', '.lane-h', '.node-box', '.verdict', '.capdef',
     '.map .stop', '.map .wire', '.define', '.code .l', '.bubble', '.fname', '.cmd',
-    '.rec', '.flow', '.strip .seg', '.sig-note', '.numbers .n', '.steps .st-i', '.steps .rail', '.tamper',
+    '.rec', '.cmd-cap', '.cmd', '.strip .seg', '.sig-note', '.numbers .n', '.steps .st-i', '.steps .rail', '.tamper',
     '.ring .core', '.sticker', '.facts .fact', '.capline', '.file', '.device .plat', '.phone', '.device .under', '.policy > *',
     '.gcap', '.ladder .r', '.plane', '.nots .row', '.s-three .it', '.callback',
-    '.s-thanks .qr', '.links', '.err-line', '.qr-card', '.url', '.s-follow .cap', '.eq > *', '.big-year', '.months', '.grid-legend', '.loss-line', '.pane-h', '.ktx-row', '.map-note',
+    '.s-thanks .qr', '.links', '.err-line', '.qr-card', '.url', '.s-follow .cap', '.eq > *', '.big-year', '.months', '.grid-legend', '.loss-line', '.pane-h', '.ktx-row', '.map-note', '.tweet',
   ].join(',');
 
   const hiddenFragment = (el) => !!el.closest('.fragment:not(.visible):not(.light):not(.trigger):not(.wire)');

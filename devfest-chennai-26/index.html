@@ -116,8 +116,27 @@
           <li>RN and Flutter devs ship <i>code</i> over the air today.</li>
           <li>Land on "Kotlin?" Pause. Let the room answer.</li>
         </ul>
-        <p>→ "Here's why that week matters."</p>
+        <p>→ "And it isn't just small teams."</p>
         <p><i>Swiggy / Flipkart removed: no public source. Add back only with a link.</i></p>
+      </aside>
+    </section>
+
+    <!-- 02a · IT HAPPENS TO EVERYONE (review-limbo tweet) ================ -->
+    <section class="s s-tweet" data-background-color="#1d1442">
+      <svg class="art ghost" data-art="line" data-cols="16" data-rows="9" data-cell="120" data-seed="77" data-mask="rect" data-stroke="rgba(255,255,255,.07)" style="left:0; top:0; width:1920px; height:1080px"></svg>
+      <div class="label z">October 3, 2026</div>
+      <div class="tweet-wrap z">
+        <img class="tweet" src="media/tweet-review-limbo.webp" alt="Peter Steinberger, Oct 3: Do I know anyone at Google who could help? We're now over a week in review limbo for OpenClaw's Android app. Sundar Pichai replies: Ack, will follow up.">
+        <span class="sticker s-yellow auto" style="left:78%; top:-5%; --r:5deg; --i:0">a week in review</span>
+      </div>
+      <aside class="notes">
+        <p>⏱ ~30 s · no clicks</p>
+        <ul>
+          <li>"This was October 3rd. A well-known developer, a popular app, over a week stuck in Play review."</li>
+          <li>"The fix was to get the CEO of Google to reply." Pause for the laugh.</li>
+          <li>"Most of us can't tweet at Sundar."</li>
+        </ul>
+        <p>→ "So let's do the math for everyone else."</p>
       </aside>
     </section>
 
@@ -197,7 +216,7 @@
           <li>Define <b>capability</b>. You'll hear it all talk.</li>
         </ul>
         <p>→ "If you remember one sentence from today, make it this one."</p>
-        <p><i>Store-policy question? "Hold it, slide 23 answers it."</i></p>
+        <p><i>Store-policy question? "Hold it, slide 24 answers it."</i></p>
       </aside>
     </section>
 
@@ -437,8 +456,16 @@
       <div class="field" data-field></div>
       <div class="z">
         <div class="rec"><i></i> LIVE</div>
-        <h2>Demo</h2>
-        <div class="flow"><span>Edit <code>TodoListScreen.kt</code></span><span class="a">→</span><span>ketoyBundle</span><span class="a">→</span><span>upload</span><span class="a">→</span><span>the phone updates</span></div>
+        <div class="cmds">
+          <div class="cmd-row">
+            <p class="cmd-cap">One command, a few minutes, and it's live.</p>
+            <code class="cmd"><span class="pr">$</span> ketoy push ktx main.ktx --version 12</code>
+          </div>
+          <div class="cmd-row">
+            <p class="cmd-cap">Messed up? No worries. Roll back instantly.</p>
+            <code class="cmd"><span class="pr">$</span> ketoy ktx rollback</code>
+          </div>
+        </div>
       </div>
       <svg class="illus" viewBox="0 0 560 720" aria-hidden="true">
         <rect class="ln" pathLength="1" x="150" y="40" width="300" height="600" rx="44"/>
@@ -457,8 +484,9 @@
         <ul>
           <li>Phone on scrcpy / doc cam, on the KBC Todo screen.</li>
           <li>Change one visible thing: header text and a colour.</li>
-          <li><code>./gradlew :app:ketoyBundle</code>, upload, relaunch.</li>
+          <li>Build the bundle, then <code>ketoy push ktx main.ktx --version 12</code>. Relaunch.</li>
           <li>★ "I didn't reinstall anything."</li>
+          <li><code>ketoy ktx rollback</code>: the previous version is back on the next launch.</li>
           <li>Bonus: the same file on the iOS simulator.</li>
           <li>Tamper: flip one byte, and the native screen appears.</li>
         </ul>
