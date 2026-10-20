@@ -748,3 +748,21 @@ html.lite .year-grid, html.lite .year-grid i.on, html.print-pdf .year-grid, html
 .s-tweet .tweet-wrap { position: relative; }
 .s-tweet .tweet { display: block; width: 1280px; height: auto; border-radius: 32px; border: 2px solid rgba(255,255,255,.18); box-shadow: 0 40px 90px rgba(0,0,0,.45); }
 .s-tweet .sticker { font-size: 38px; padding: 14px 30px; }
+
+/* ---------- PDF download (readers only) -------------------------------- */
+
+.pdf-dl {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 999px;
+  font: 600 14px/1 'Inter', -apple-system, 'Segoe UI', sans-serif; letter-spacing: .02em;
+  color: #fff; text-decoration: none;
+  background: rgba(29, 20, 66, .78); border: 1px solid rgba(255, 255, 255, .35);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  opacity: .8; transition: opacity .2s ease, background .2s ease;
+}
+.pdf-dl:hover, .pdf-dl:focus-visible { opacity: 1; background: rgba(29, 20, 66, .95); outline: none; }
+.pdf-dl svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+/* on stage the deck is full screen; the button never shows there */
+:fullscreen .pdf-dl, html:fullscreen .pdf-dl, html.embedded .pdf-dl, html.print-pdf .pdf-dl { display: none; }
+@media print { .pdf-dl { display: none; } }

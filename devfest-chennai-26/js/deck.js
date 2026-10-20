@@ -8,6 +8,8 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const lite = /[?&]lite\b/.test(location.search) || reduced;
   if (lite) document.documentElement.classList.add('lite');
+  // the PDF button is for readers: not inside the speaker view's slide previews
+  if (window.self !== window.top) document.documentElement.classList.add('embedded');
 
   const deck = new Reveal({
     width: 1920,

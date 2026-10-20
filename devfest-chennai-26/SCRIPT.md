@@ -7,7 +7,7 @@ The stage notes in `index.html` are short cue lists. This file keeps the full pr
 
 **Open (30s).** "Hi Chennai. Quick show of hands — who has shipped a one-line fix and then waited a week for users to actually get it?" Let the hands go up. "That wait is what this talk is about."
 
-**Who I am.** One sentence: Aditya Shinde, founder of Ketoy.dev. Mention we build KetoyVM, an open-source Kotlin execution runtime, and that it has been live on Google Play since mid-2026.
+**Who I am.** One sentence: Aditya Shinde, founder of Ketoy.dev. Mention what Ketoy builds, a Kotlin execution runtime, and that it has been live on Google Play since mid-2026.
 
 **Promise for the next 30 minutes.** You will leave knowing (1) what "over the air" means for Kotlin, (2) how it is different from server-driven UI, (3) how the compiler → bundle → runtime pipeline actually works, and (4) how it runs on iOS and at multi-bundle scale.
 
@@ -104,7 +104,7 @@ The stage notes in `index.html` are short cue lists. This file keeps the full pr
 
 **The policy question (fragment pills).** Apple guideline 2.5.2 forbids executing downloaded code that changes the app's purpose. The tolerated lane — React Native OTA, Judo, config-driven SDUI — is interpreted content inside the app's stated purpose. Our three properties are enforced by architecture, not prose: interpreted only (the JIT seam returns null on iOS and a test asserts it), sandboxed (capability registry), signed (verification before parsing). On Google Play the app passed review with zero policy violations.
 
-**Honest caveats.** SwiftUI backend has a few components still reported unsupported by name (`Canvas`); the App Store submission is a product step we have not done from the library repo. Say so if asked.
+**Honest caveats.** SwiftUI backend has a few components still reported unsupported by name (`Canvas`); the App Store submission is still pending. Say so if asked.
 
 
 ## 9 · MULTI-BUNDLE + SCALE
@@ -130,6 +130,6 @@ The stage notes in `index.html` are short cue lists. This file keeps the full pr
 
 4. Multiplatform: the same bytes on Android and iOS, and the native screen you shipped in the APK is always the fallback — adopting it is additive, never a rewrite.
 
-**Close.** Repo and docs on screen. Replace the QR placeholder with a real QR to the repo before the event. Invite people to try the getting-started guide tonight — it is a fifteen-minute setup — and to find us after for the demo on a real device.
+**Close.** LinkedIn and ketoy.dev on screen, with a QR to LinkedIn. Invite people to try the getting-started guide tonight — it is a fifteen-minute setup — and to find us after for the demo on a real device.
 
 **Q&A prompts to be ready for:** performance numbers (slide 7 notes), App Store status (slide 8 notes), how capabilities are versioned (by fully-qualified name; ids are allocations; merged registry fails the build on collisions), what happens on an old app version (`minAppVersion` in the bundle; the host refuses and falls back natively).
